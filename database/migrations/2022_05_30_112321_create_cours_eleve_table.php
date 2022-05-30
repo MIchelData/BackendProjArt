@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('cours_eleve', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->foreign('id_eleves')->references('id')->on('eleves')
+            $table->foreignId('id_eleve')->constrained('eleves');
+            /* $table->foreign('id_eleves')->references('id')->on('eleves')
                 ->onDelete('restrict')
-                ->onUpdate('restrict');
-            $table->foreign('id_cours')->references('id')->on('config_cours')
+                ->onUpdate('restrict'); */
+            $table->foreignId('id_cours')->constrained('config_cours');
+            /* $table->foreign('id_cours')->references('id')->on('config_cours')
                 ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onUpdate('restrict'); */
         });
     }
 

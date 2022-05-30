@@ -21,9 +21,7 @@ return new class extends Migration
             $table->integer('duree');
             $table->string('description');
             $table->string('infos');
-            $table->foreign('id_enseignants')->references('id')->on('enseignants')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            $table->foreignId('id_user')->constrained('users');
     });
 }
 

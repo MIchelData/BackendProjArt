@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('infos');
             $table->integer('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('user')
+            $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
