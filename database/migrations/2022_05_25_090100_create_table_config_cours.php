@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('table_config_cours', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->id('id_eleves');
-            $table->id('id_enseignants');
-            $table->id('id_salles');
-            $table->id('id_classes');
-            $table->id('id_module');
+            $table->integer('id_eleves');
+            $table->integer('id_enseignants');
+            $table->integer('id_salles');
+            $table->integer('id_classes');
+            $table->integer('id_module');
             $table->string('nom');
         });
     }
