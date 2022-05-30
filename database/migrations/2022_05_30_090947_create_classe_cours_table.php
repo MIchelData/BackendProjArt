@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_config_cours', function (Blueprint $table) {
+        Schema::create('classe_cours', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('id_eleves');
-            $table->integer('id_enseignants');
-            $table->integer('id_salles');
-            $table->integer('id_classes');
-            $table->integer('id_module');
-            $table->string('nom');
+            $table->foreign('id_classes')->references('id')->on('classes')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+            $table->foreign('id_config_cours')->references('id')->on('config_cours')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_config_cours');
+        Schema::dropIfExists('classe_cours');
     }
 };
