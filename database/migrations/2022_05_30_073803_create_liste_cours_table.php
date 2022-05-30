@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('liste_cours', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->foreign('id_salles')->references('id')->on('salles');
             $table->date('date_debut');
             $table->date('date_fin');
+            $table->integer('id_salle');
+            $table->foreign('id_salle')->references('id')->on('salles')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 
