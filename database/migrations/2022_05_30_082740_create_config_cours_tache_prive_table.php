@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('config_cour_tache_prive', function (Blueprint $table) {
+        Schema::create('config_cours_tache_prive', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('id_tache_privee')->unsigned();
 
-            $table->foreign('id_tache_privee')->references('id')->on('tache_privee')
+            $table->foreign('id_tache_privee')->references('id')->on('taches_privee')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
