@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_config_cours', function (Blueprint $table) {
+        Schema::create('config_cours', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('id_module')->unsigned();
             $table->foreign('id_module')->references('id')->on('modules')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');

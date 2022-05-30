@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('classe_eleve', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('id_eleves')->unsigned();
+            $table->integer('id_classe')->unsigned();
             $table->foreign('id_eleve')->references('id')->on('eleves')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');

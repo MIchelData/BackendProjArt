@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('config_cours_liste_cours', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('id_config_cours')->unsigned();
+            $table->integer('id_liste_cours')->unsigned();
             $table->foreign('id_config_cours')->references('id')->on('config_cours')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');

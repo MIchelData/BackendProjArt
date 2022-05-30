@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('duree');
             $table->string('description');
             $table->string('infos');
+            $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('user')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
