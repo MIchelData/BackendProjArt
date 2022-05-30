@@ -12,14 +12,16 @@ class calendrierController extends Controller
         $matchdstart = '/DTSTART;(.*)/';
         $matchend = '/DTEND;(.*)/';
         $matchsalle ='/LOCATION:(.*)/';
+        $matchnomcours = '/SUMMARY:(.*)/';
 
 
        // /.*?base64(.*?)/g
         $n = preg_match_all($matchdstart, $calendrier,$datestart, PREG_PATTERN_ORDER);
         preg_match_all($matchend,$calendrier,$datesend,PREG_PATTERN_ORDER);
         preg_match_all($matchsalle, $calendrier, $salles, PREG_PATTERN_ORDER );
+        preg_match_all($matchnomcours,$calendrier, $nomcours, PREG_PATTERN_ORDER);
 
-       // dd($n);
-        dd($salles);
+        dd($nomcours);
+
     }
 }
