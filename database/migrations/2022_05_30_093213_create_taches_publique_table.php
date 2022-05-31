@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->date('date');
             $table->integer('duree');
-            $table->string('description');
+            $table->text('description');
             $table->string('infos');
             $table->foreignId('id_user')->constrained('users');
     });
