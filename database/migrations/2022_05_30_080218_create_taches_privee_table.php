@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('date');
             $table->integer('duree');
             $table->text('description');
-            $table->string('infos');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('restrict')
