@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('nom');
+            $table->string('abreviation');
         });
     }
 

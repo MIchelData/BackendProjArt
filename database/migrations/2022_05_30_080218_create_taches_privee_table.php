@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('titre');
             $table->date('date');
             $table->integer('duree');
-            $table->string('description');
+            $table->text('description');
             $table->string('infos');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')

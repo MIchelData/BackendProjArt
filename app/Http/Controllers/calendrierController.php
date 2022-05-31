@@ -21,7 +21,7 @@ class calendrierController extends Controller
         preg_match_all($matchsalle, $calendrier, $salles, PREG_PATTERN_ORDER );
         preg_match_all($matchnomcours,$calendrier, $nomcours, PREG_PATTERN_ORDER);
 
-        dd($nomcours);
+        dd($salles);
 
     }
 }
