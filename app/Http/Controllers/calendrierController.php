@@ -32,7 +32,7 @@ class calendrierController extends Controller
             }
 
          }
-        dd($listedessalles);
+        dd($nomcours);
 
     }
 }
