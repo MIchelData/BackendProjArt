@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('type');
-            $table->date('date');
+            $table->integer('date');
             $table->integer('duree');
             $table->text('description');
             $table->string('titre');

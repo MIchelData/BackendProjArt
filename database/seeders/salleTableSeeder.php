@@ -16,6 +16,7 @@ class salleTableSeeder extends Seeder
      */
     public function getCalendrier(){
         $sallesdifferentes = [];
+        $listesalles = [];
         $listenomfichiers = ["_M48_S2_2021_2022.ics",
             "_M49-1_S1_2021_2022.ics",
             "_M49-1_S2_2021_2022.ics",
@@ -41,11 +42,25 @@ class salleTableSeeder extends Seeder
            preg_match_all($matchend,$calendrier,$datesend,PREG_PATTERN_ORDER);
            preg_match_all($matchsalle, $calendrier, $salles, PREG_PATTERN_ORDER );
            preg_match_all($matchnomcours,$calendrier, $nomcours, PREG_PATTERN_ORDER);
-           foreach ($salles as $value){
-               if(in_array($value, $sallesdifferentes)){
 
-               }else{
-                   $sallesdifferentes = $value;
+           array_shift($salles[1]);
+           foreach ($salles[1] as $salle){
+               if($salle != ""){
+                   $str_arr = explode (",", $salle);
+                   foreach ($str_arr as $sallesepare){
+                       array_push($listesalles,$sallesepare);
+                   }
+               }
+
+           }
+           //dd($listesalles);
+          //  $sallesdifferentes= ["",""];
+           // dd($sallesdifferentes);
+           foreach ($listesalles as $value){
+              if(in_array(trim($value), $sallesdifferentes)){
+
+              }else{
+                   array_push($sallesdifferentes, trim($value));
                }
            }
        }

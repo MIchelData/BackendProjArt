@@ -17,10 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('titre');
-            $table->date('date');
+            $table->integer('date');
             $table->integer('duree');
             $table->text('description');
-            $table->string('infos');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')
                 ->onDelete('restrict')
