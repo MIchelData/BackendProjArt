@@ -5,8 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
-class ElevesTableSeeder extends Seeder
+class CoursEleveTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +14,11 @@ class ElevesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('eleves')->delete();
-        for ($i=1; $i<=146 ; $i++) { 
-        DB::table('eleves')->insert([
-                'taux_absenses' => rand(0,100),
-                'id_classe' => rand(1,3)]);
-         }   
+        DB::table('cours_eleve')->delete();
+        for ($i=1; $i < 22 ; $i++) { 
+            DB::table('cours_eleve')->insert([
+                'id_cours' => $i,
+                'id_eleve' => $i]);
+        }
     }
 }

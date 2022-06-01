@@ -20,7 +20,7 @@ class TachesPubliqueTableSeeder extends Seeder
             'description' => "2 page A4 avec l'ensemble des élèves de la classe",
             'date' => '2020-05-01',
             'duree' => '240',
-            'infos' => 'rendu trombinoscope',
+            'titre' => 'rendu trombinoscope',
             'id_user' => 1,
             'type' => 'devoir']);
 
@@ -30,7 +30,7 @@ class TachesPubliqueTableSeeder extends Seeder
                 'description' => 'tout documents autorisés',
                 'date' => '2020-01-01',
                 'duree' => '240',
-                'infos' => 'examen de prog',
+                'titre' => 'examen de prog',
                 'id_user' => 2,
                 'type' => 'examen']);
         
@@ -38,7 +38,7 @@ class TachesPubliqueTableSeeder extends Seeder
                     'description' => 'tout documents autorisés',
                     'date' => '2020-10-10',
                     'duree' => '60',
-                    'infos' => 'Repas canadien comem',
+                    'titre' => 'Repas canadien comem',
                     'id_user' => 2,
                     'type' => 'autre']);
 
@@ -51,7 +51,7 @@ class TachesPubliqueTableSeeder extends Seeder
     $table->date('date');
     $table->integer('duree');
     $table->string('description');
-    $table->string('infos');
+    $table->string('titre');
     $table->foreignId('id_user')->constrained('users');
 }); */
 

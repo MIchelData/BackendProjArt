@@ -53,8 +53,8 @@ class usersTableSeeder extends Seeder
             'admin'=>0
         ]);
         DB::table('users')->insert([
-            'nom'=>'Panchard ',
-            'prenom'=>' Jacques',
+            'nom'=>'Panchard',
+            'prenom'=>'Jacques',
             'email'=>'jaques.panchard@heig-vd.ch',
             'password'=>Hash::make('jaquespanchard'),
             'admin'=>0
@@ -68,33 +68,48 @@ class usersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'nom'=>'Pilipona',
-            'prenom'=>' Claude',
+            'prenom'=>'Claude',
             'email'=>'claude.philipona@heig-vd.ch',
             'password'=>Hash::make('claudephilipona'),
             'admin'=>0
         ]);
 
         DB::table('users')->insert([
-            'nom'=>'Alberini ',
-            'prenom'=>' Alain',
+            'nom'=>'Alberini',
+            'prenom'=>'Alain',
             'email'=>'alain.alberini@heig-vd.ch',
             'password'=>Hash::make('alainalberini'),
             'admin'=>0
         ]);
         DB::table('users')->insert([
-            'nom'=>'Germanier ',
-            'prenom'=>' Yves',
+            'nom'=>'Germanier',
+            'prenom'=>'Yves',
             'email'=>'yves.germanier@heig-vd.ch',
             'password'=>Hash::make('yvesgermanier'),
             'admin'=>0
         ]);
         DB::table('users')->insert([
-            'nom'=>'Dufour ',
+            'nom'=>'Dufour',
             'prenom'=>' Arnaud',
             'email'=>'arnaud.dufour@heig-vd.ch',
             'password'=>Hash::make('yvesgermanier'),
             'admin'=>0
         ]);
+        DB::table('users')->insert([
+            'nom'=>'Chabloz',
+            'prenom'=>'Nicolas',
+            'email'=>'nicolas.chabloz@heig-vd.ch',
+            'password'=>Hash::make('nicolaschabloz'),
+            'admin'=>0
+        ]);
+        DB::table('users')->insert([
+            'nom'=>'Hess',
+            'prenom'=>'Jean-Pierre',
+            'email'=>'nicolas.chabloz@heig-vd.ch',
+            'password'=>Hash::make('nicolaschabloz'),
+            'admin'=>0
+        ]);
+
 
 
         

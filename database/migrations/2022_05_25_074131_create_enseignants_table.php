@@ -16,9 +16,7 @@ return new class extends Migration
         Schema::create('enseignants', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email');
+            $table->foreignId('id_user')->constrained('users');
         });
     }
 
