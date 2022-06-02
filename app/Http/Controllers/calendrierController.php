@@ -9,6 +9,7 @@ class calendrierController extends Controller
     public function getCalendrier(){
         $file = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\horairesics\Horaire_M48_S2_2021_2022.ics';
         $calendrier = file_get_contents($file);
+        dd($calendrier);
         $matchdstart = '/DTSTART;(.*)/';
         $matchend = '/DTEND;(.*)/';
         $matchsalle ='/LOCATION:(.*)/';

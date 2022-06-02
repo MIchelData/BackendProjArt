@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('liste_cours', function (Blueprint $table) {
+        Schema::create('periodes', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->date('date_debut');
-            $table->date('date_fin');
-            $table->integer('id_salle')->unsigned();
-            $table->foreign('id_salle')->references('id')->on('salles')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            $table->integer('id_matiere');
+            $table->integer('date_debut');
+            $table->integer('date_fin');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('liste_cours');
+        Schema::dropIfExists('periodes');
     }
 };

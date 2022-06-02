@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('matiere_m-49-1', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nom');
-            $table->string('abreviation');
+          $table->string('nom');
+          $table->integer('id_enseignant');
+            $table->foreign('id_enseignant')->references('id')->on('enseignants')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('matieres_m-49-1');
     }
 };

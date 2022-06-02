@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('eleves', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->foreignId('id_user')->constrained('users');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('classes');
+            $table->string('email')->unique();
+            $table->string('password');
         });
     }
 

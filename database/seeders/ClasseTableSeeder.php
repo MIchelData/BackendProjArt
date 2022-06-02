@@ -15,20 +15,22 @@ class ClasseTableSeeder extends Seeder
     public function run()
     {
         DB::table('classes')->delete();
-        for ($i=1; $i<=3 ; $i++) { 
+        DB::table('classes')->insert([
+            'nom' => 'M48-1',
+            'annee' => '2019']);
+
+        for ($i=1; $i<=2 ; $i++) {
         DB::table('classes')->insert([
                 'nom' => 'M49-'.$i,
                 'annee' => '2020']);
-         }   
-      for ($i=3; $i<3 ; $i+3) { 
+         }
+      for ($i=1; $i<=3 ; $i++) {
         DB::table('classes')->insert([
                 'nom' => 'M50-'.$i,
                 'annee' => '2021']);
          }
-        for ($i=3; $i<3 ; $i+3) {
-        DB::table('classes')->insert([
-                'nom' => 'M51-'.$i,
-                'annee' => '2022']);
-         }
+
+
+
         }
 }

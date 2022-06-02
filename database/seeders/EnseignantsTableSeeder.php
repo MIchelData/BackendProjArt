@@ -12,10 +12,20 @@ class EnseignantsTableSeeder extends Seeder
      *
      * @return void
      */
+public function listeprof(){
+    $chemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\ID-professeurs.txt';
+    $liste_prof = file_get_contents($chemin);
+    dd($liste_prof);
+    
+    return $listenomprenomprof
+}
+
+
     public function run()
     {
+        $this->listeprof();
         DB::table ('enseignants')->delete();
-        for ($i=0; $i <45 ; $i++) { 
+        for ($i=0; $i <45 ; $i++) {
             DB::table('enseignants')->insert([
                 'id_user'=>$i ]);
         }
