@@ -18,7 +18,7 @@ class MatieresTableSeeder extends Seeder
      */
     public function GetMatiere()
     {
-        $XMLFichier = 'C:\Users\johna\Desktop\Projart\doc\import-final-21-10-2021.xml';
+        $XMLFichier = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\import-final-21-10-2021.xml';
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
        /* dd($XmlData->unit[2]['abbreviation'] . "<br>");
         $doc = new DOMDocument();
@@ -41,12 +41,12 @@ class MatieresTableSeeder extends Seeder
        /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
         foreach ( $XmlData->aperiodic[0]->unit as $Matiere) {
             $Matieres[] =(string) $Matiere['abbreviation'];
-            
+
         }
         foreach($Matieres  as $m ){
             $matiereListe[]=explode(" ",$m);
         }
-        
+
         /* $matiereListe=explode(" ",$Matieres[0]); */
         /* dd($matiereListe); */
         return $matiereListe;
@@ -60,17 +60,17 @@ class MatieresTableSeeder extends Seeder
         $listematiere = $this->GetMatiere();
         foreach($listematiere as $key=>$value){
             /* dd($value[1]); */
-            DB::table('matiere')->insert([
+            DB::table('matieres')->insert([
                 'nom' => $value[0],
-                /* 'id_enseignant'=>rand(1,100)   */ 
-                
+                /* 'id_enseignant'=>rand(1,100)   */
+
             ]);
 
         }
         /* foreach ($listematiere as $matiere) {
             DB::table('matieres')->insert([
                 'nom' => $matiere,
-                
+
             ]);
         } */
     }

@@ -20,22 +20,22 @@ public function listeprof(){
     return $listenomprenomprof;
 }
 
-    public function getEnseignants()
-    {
+        public function getEnseignants()
+        {
 
-        $ListeEnseignantsChemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\listesEtudiantsProffs\Liste_Enseignants.csv';
-        $ListeEnseignants = [];
-        $f = fopen($ListeEnseignantsChemin, "r");
-        if ($f === false) {
-            die('Cannot open the file ' . $ListeEnseignantsChemin);
+            $ListeEnseignantsChemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\listesEtudiantsProffs\Liste_Enseignants.csv';
+            $ListeEnseignants = [];
+            $f = fopen($ListeEnseignantsChemin, "r");
+            if ($f === false) {
+                die('Cannot open the file ' . $ListeEnseignantsChemin);
+            }
+            while (($row = fgetcsv($f, 10000, ";")) !== false) {
+                $ListeEnseignants[] = $row;
+
+            }
+
+            return $ListeEnseignants;
         }
-        while (($row = fgetcsv($f, 10000, ";")) !== false) {
-            $ListeEnseignants[] = $row;
-
-        }
-
-        return $ListeEnseignants;
-    }
     public function run()
     {
         $listeenseignants = $this->getEnseignants();
@@ -49,11 +49,11 @@ public function listeprof(){
                 }
 
             }
-            
+
             DB::table('enseignants')->insert([
                 'nom'=>$enseignant[1],
                 'prenom'=>$enseignant[2],
-                'email'=>$enseignant[2].".".$enseignant[1]."@heig-vd.ch",
+                'email'=>strtolower($enseignant[2]).".".strtolower($enseignant[1])."@heig-vd.ch",
                 'admin'=>0,
                 'branche'=> $listecours
             ]);
