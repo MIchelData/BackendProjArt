@@ -10,8 +10,8 @@ class Matiere extends Model
     use HasFactory;
 
     protected $fillable=['nom'];
-    public function articles() {
-        return $this->belongsToMany(Matiere::class);
+    public function periodes() {
+        return $this->hasMany(Periode::class);
 
     }
 }
