@@ -38,6 +38,8 @@ class MatieresTableSeeder extends Seeder
 
 
         $Matieres = [];
+        $classe=49;
+        $noclasse=1;
        /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
         foreach ( $XmlData->aperiodic[0]->unit as $Matiere) {
             $Matieres[] =(string) $Matiere['abbreviation'];
@@ -46,10 +48,25 @@ class MatieresTableSeeder extends Seeder
         foreach($Matieres  as $m ){
             $matiereListe[]=explode(" ",$m);
         }
+
+        foreach($matiereListe as $m){
+        for ($i=1; $i <4 ; $i++) { 
+            
+                $matiereListe2[]="M".$classe."_".$noclasse."_".$m[0];
+                $noclasse++;
+                $classe++;
+            
+            
+        }
+        $classe=49;
+        $noclasse=1;
+    }
+      
+       
         
         /* $matiereListe=explode(" ",$Matieres[0]); */
         /* dd($matiereListe); */
-        return $matiereListe;
+        return $matiereListe2;
         /* dd($Matieres);
         $test=$Matieres[24];
         dd($test);
