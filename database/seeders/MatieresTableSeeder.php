@@ -43,7 +43,7 @@ class MatieresTableSeeder extends Seeder
        /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
         foreach ( $XmlData->aperiodic[0]->unit as $Matiere) {
             $Matieres[] =(string) $Matiere['abbreviation'];
-            
+
         }
         foreach($Matieres  as $m ){
             $matiereListe[]=explode(" ",$m);
@@ -65,7 +65,7 @@ class MatieresTableSeeder extends Seeder
        
         
         /* $matiereListe=explode(" ",$Matieres[0]); */
-        /* dd($matiereListe); */
+        dd($matiereListe2);
         return $matiereListe2;
         /* dd($Matieres);
         $test=$Matieres[24];
@@ -77,17 +77,17 @@ class MatieresTableSeeder extends Seeder
         $listematiere = $this->GetMatiere();
         foreach($listematiere as $key=>$value){
             /* dd($value[1]); */
-            DB::table('matiere')->insert([
+            DB::table('matieres')->insert([
                 'nom' => $value[0],
-                /* 'id_enseignant'=>rand(1,100)   */ 
-                
+                /* 'id_enseignant'=>rand(1,100)   */
+
             ]);
 
         }
         /* foreach ($listematiere as $matiere) {
             DB::table('matieres')->insert([
                 'nom' => $matiere,
-                
+
             ]);
         } */
     }
