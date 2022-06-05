@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 class EnseignantsTableSeeder extends Seeder
 {
     /**
@@ -51,11 +53,12 @@ public function listeprof(){
             }
 
             DB::table('enseignants')->insert([
-                'nom'=>$enseignant[1],
-                'prenom'=>$enseignant[2],
+                'nom'=>trim($enseignant[1]),
+                'prenom'=>trim($enseignant[2]),
                 'email'=>strtolower($enseignant[2]).".".strtolower($enseignant[1])."@heig-vd.ch",
                 'admin'=>0,
-                'branche'=> $listecours
+                'branche'=> $listecours,
+                'password'=> Hash::make($enseignant[2]."".$enseignant[1])
             ]);
         }
     }

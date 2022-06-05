@@ -18,9 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nom');
             $table->string('prenom');
+            $table->string('branche');
+            $table->string('password');
             $table->string('email')->unique();
             $table->boolean('admin')->default(false);
-            $table->string('branche');
+
         });
     }
 

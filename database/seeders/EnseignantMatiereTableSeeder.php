@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Matiere;
+use App\Models\Enseignant;
+use Illuminate\Support\Facades\DB;
 
 class EnseignantMatiereTableSeeder extends Seeder
 {
@@ -23,57 +25,43 @@ class EnseignantMatiereTableSeeder extends Seeder
         $Prof_id = [];
         $listecomplete = [];
         $units = $XmlData->aperiodic[0]->unit;
-        $classes = [];
-        $profs = [];
-        foreach ($units as $unit){
-            foreach ($unit->teaching as $teaching){
+        //$classes = [];
+        //$profs = [];
+        $brancheclasseprof = [];
+        foreach ($units as $unite){
+            $currentunit = explode(" ",(string) $unite['abbreviation']);
+            $currentunit = $currentunit[0];
+            unset($classes);
+            unset($profs);
+            foreach ($unite->teaching as $teaching){
                 $classes[] = (string) $teaching['tag'];
-
-                    $profs[] = (string) $teaching->lesson[0]->teachers->teacher['idisa'];
-            }
-            //dd($profs);
-            $abbreviationcorrecte = explode(" ",$unit['abbreviation']) ;
-            //dd($abbreviationcorrecte[0]);
-            $listecomplete = array($abbreviationcorrecte[0], $classes, $profs);
-            dd($listecomplete);
-        }
-
-       // dd(count($unit));
-        for($i=0; $i<27; $i++){
-            $prof =  $XmlData->aperiodic[0]->unit[$i]->teaching->lesson->teachers->teacher ;
-            if($prof != null ) {
-                $Prof_id[$i] = (string) $prof['idisa'];
+                    if($teaching->lesson[0]->teachers->teacher!=null) {
+                        $profs[] = (string)$teaching->lesson[0]->teachers->teacher['idisa'];
+                    }else{
+                        $profs[] = "";
+                    }
             }
 
+            array_push($listecomplete,array($currentunit, $classes, $profs));
 
         }
-       // for($i=0; $i<10; $i++){
 
-         //   $i+=10;
-          //  $prof =  $XmlData->aperiodic[0]->unit[$i]->teaching->lesson->teachers->teacher ;
-          //  $Prof_id[] = (string) $prof['idisa'];
-
-        //}
-
-        $IdListe= [];
-        foreach($Prof_id  as $p ){
-            $IdListe[]=explode(" ",$p);
-        }
+        return $listecomplete;
 
 
-        return $Prof_id;
 
     }
     public function rendnomprof() {
         $chemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\ID-professeurs.txt';
        $listeprof = file_get_contents($chemin);
        $listeprofexplose = explode(",", $listeprof);
+        //dd($listeprofexplose);
+       // foreach($listeprofexplose as $key => $value){
+         //   if($value == "" || $value=="\r\n"){
+          //      unset($listeprofexplose[$key]);
+          //  }
 
-        foreach($listeprofexplose as $key => $value){
-            if($value == "" || $value=="\r\n"){
-                unset($listeprofexplose[$key]);
-            }
-        }
+        return $listeprofexplose;
 
 
     }
@@ -86,17 +74,52 @@ class EnseignantMatiereTableSeeder extends Seeder
      */
     public function run()
     {
-       $profid = $this->GetMatiere();
-       dd($profid);
+       $listeprofclasse = $this->GetMatiere();
+
+
+
       $listeprofnomid =  $this->rendnomprof();
-       // $listematiere = Matiere::limit(3)->get();
-       // dd($listematiere);
-        //App\Models\Matiere::where('user_id','10')->orderBy('nbSecondes','ASC')->get();
+      array_shift($listeprofnomid);
 
-        DB::table('enseignant_matiere')->insert([
+        DB::table ('enseignant_matiere')->delete();
+$i = 0;
+        foreach ($listeprofclasse as $profclasse){
+            $i++;
+            foreach ($profclasse[1] as $key => $classe){
 
-              'enseignant_id' => 'sas',
-                'matiere_id' => 'asas'
-        ]);
+                $nomclasse = $profclasse[0]."".$classe;
+                //dd($nomclasse);
+                $matiereId = Matiere::where('nom',$nomclasse)->get('id');
+                //dd($matiereId[0]->id);
+
+                $key = array_search($profclasse[2][$key], $listeprofnomid);
+
+                if($key != false) {
+
+                    //dd($listeprofnomid[$key-1]);
+
+                    $enseignantNomPrenom = $listeprofnomid[$key - 1];
+                    $enseignantNom = explode(" ", $enseignantNomPrenom);
+                    $enseignantNom = trim($enseignantNom[0]);
+
+
+
+                    // dd($enseignantNom);
+
+                    $enseignantId = Enseignant::where('nom', $enseignantNom)->get('id');
+
+
+
+
+                    DB::table('enseignant_matiere')->insert([
+                        'enseignant_id' => $enseignantId[0]->id,
+                        'matiere_id' => $matiereId[0]->id
+                    ]);
+                }
+
+            }
+        }
+
+
     }
 }

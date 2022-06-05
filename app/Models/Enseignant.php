@@ -10,7 +10,7 @@ class Enseignant extends Model
     use HasFactory;
 
     protected $fillable=['nom','prenom', 'email', 'branche'];
-    public function articles() {
+    public function matieres() {
         return $this->belongsToMany(Matiere::class);
 
 }
