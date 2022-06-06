@@ -29,13 +29,11 @@ class DatabaseSeeder extends Seeder
      //$this->call(ClasseTableSeeder::class);
       //  $this->call(ConfigCoursTableSeeder::class);
        //$this->call(classeCoursTableSeeder::class);
-        //$this->call(EnseignantsTableSeeder::class);
-       
-      // $this->call(EnseignantMatiereTableSeeder::class);
+      // $this->call(EnseignantsTableSeeder::class);
         //$this->call(MatieresTableSeeder::class);
-       // $this->call(EnseignantMatiereTableSeeder::class);
-        $this->call(MatieresTableSeeder::class);
-       // $this->call(PeriodesTableSeeder::class);
+        $this->call(EnseignantMatiereTableSeeder::class);
+       // $this->call(MatieresTableSeeder::class);
+        $this->call(PeriodesTableSeeder::class);
 
 
     }
