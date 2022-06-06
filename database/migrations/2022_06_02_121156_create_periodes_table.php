@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('periodes', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('id_matiere');
             $table->integer('date_debut');
             $table->integer('date_fin');
+            $table->foreignId('matiere_id')->constrained('matieres');
         });
     }
 

@@ -20,34 +20,50 @@ class MatieresTableSeeder extends Seeder
     {
         $XMLFichier = 'C:\Users\johna\Desktop\Projart\doc\import-final-21-10-2021.xml';
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
-       /* dd($XmlData->unit[2]['abbreviation'] . "<br>");
-        $doc = new DOMDocument();
-        $doc->loadXML(file_get_contents($XMLFichier));
-        $DomNodeList = $doc->getElementsByTagName( 'unit' ); */
+        /* dd($XmlData->unit[2]['abbreviation'] . "<br>");
+         $doc = new DOMDocument();
+         $doc->loadXML(file_get_contents($XMLFichier));
+         $DomNodeList = $doc->getElementsByTagName( 'unit' ); */
         /* foreach($DomNodeList as $domNode) {
             $cours[]=$domNode->getElementsByTagName('unit');
         } */
-       /*  dd($cours);
-        $xpath = new DOMXpath($doc);
-        $nodes = $xpath->query('//*');
-        $names = array();
-        foreach ($nodes as $node) {
-            $names[] = $node->nodeName;
-        }
-        dd($names); */
+        /*  dd($cours);
+         $xpath = new DOMXpath($doc);
+         $nodes = $xpath->query('//*');
+         $names = array();
+         foreach ($nodes as $node) {
+             $names[] = $node->nodeName;
+         }
+         dd($names); */
 
 
-        $Matieres = [];
-        $classe=49;
+        $nommatiereclasse = [];
+        $classe=48;
         $noclasse=1;
-       /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
+        $listeclasse=[];
+
+        /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
         foreach ( $XmlData->aperiodic[0]->unit as $Matiere) {
-            $Matieres[] =(string) $Matiere['abbreviation'];
+
+            foreach ($Matiere->teaching as $teaching){
+               // dd($Matiere['abbreviation']);
+                $matiereexplose=explode(" ",$Matiere['abbreviation']);
+               // dd($matiereexplose[0][0]);
+                $nommatiere = (string) $matiereexplose[0];
+               // dd($nommatiere);
+                $nommatiereclasse[] =$nommatiere."".$teaching['tag'];
+                
+
+            }
+
 
         }
-        foreach($Matieres  as $m ){
-            $matiereListe[]=explode(" ",$m);
-        }
+       
+        //dd($matiereexplose);
+        //dd($nommatiereclasse);
+
+
+
 
         foreach($matiereListe as $m){
         for ($i=1; $i <4 ; $i++) { 
@@ -65,8 +81,8 @@ class MatieresTableSeeder extends Seeder
        
         
         /* $matiereListe=explode(" ",$Matieres[0]); */
-        dd($matiereListe2);
-        return $matiereListe2;
+       // dd($matiereListe2);
+        return $nommatiereclasse;
         /* dd($Matieres);
         $test=$Matieres[24];
         dd($test);
@@ -78,7 +94,7 @@ class MatieresTableSeeder extends Seeder
         foreach($listematiere as $key=>$value){
             /* dd($value[1]); */
             DB::table('matieres')->insert([
-                'nom' => $value[0],
+                'nom' => $value,
                 /* 'id_enseignant'=>rand(1,100)   */
 
             ]);
