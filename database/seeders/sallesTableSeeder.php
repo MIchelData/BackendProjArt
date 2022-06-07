@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class salleTableSeeder extends Seeder
+class sallesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -29,7 +29,9 @@ class salleTableSeeder extends Seeder
             "_M50-3_S1_2021_2022.ics",
             "_M50-3_S2_2021_2022.ics"];
        foreach ($listenomfichiers as $file){
-           $chemincomplet = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\horairesics\Horaire'.$file;
+        
+           $chemincomplet = storage_path('app/horaire' . DIRECTORY_SEPARATOR . 'Horaire'.$file);
+
            $calendrier = file_get_contents($chemincomplet);
            $matchdstart = '/DTSTART;(.*)/';
            $matchend = '/DTEND;(.*)/';

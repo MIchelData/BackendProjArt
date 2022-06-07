@@ -17,4 +17,7 @@ class Matiere extends Model
     public function enseignants(){
         return $this->belongsToMany(Enseignant::class);
     }
+    public function eleves(){
+        return $this->belongsToMany(Eleve::class);
+    }
 }

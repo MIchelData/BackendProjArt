@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('periodes', function (Blueprint $table) {
+        Schema::create('eleve_matiere', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('date_debut');
-            $table->integer('date_fin');
+            $table->foreignId('eleve_id')->constrained('eleves');
             $table->foreignId('matiere_id')->constrained('matieres');
-            $table->foreignId('salle_id')->constrained('salles');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('periodes');
+        Schema::dropIfExists('eleve_matiere');
     }
 };

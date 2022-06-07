@@ -15,9 +15,9 @@ class EnseignantsTableSeeder extends Seeder
      * @return void
      */
 public function listeprof(){
-    $chemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\ID-professeurs.txt';
+    $chemin = storage_path('app' . DIRECTORY_SEPARATOR . 'ID-professeurs.txt') ;
     $liste_prof = file_get_contents($chemin);
-    dd($liste_prof);
+    
 
     return $listenomprenomprof;
 }
@@ -25,7 +25,12 @@ public function listeprof(){
         public function getEnseignants()
         {
 
-            $ListeEnseignantsChemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\listesEtudiantsProffs\Liste_Enseignants.csv';
+            //go to the file and get the content Liste_Enseignants.csv
+
+  //'\..\storage\app\Liste_Enseignants.csv'
+            
+            $ListeEnseignantsChemin = storage_path('app' . DIRECTORY_SEPARATOR . 'Liste_Enseignants.csv');
+           
             $ListeEnseignants = [];
             $f = fopen($ListeEnseignantsChemin, "r");
             if ($f === false) {

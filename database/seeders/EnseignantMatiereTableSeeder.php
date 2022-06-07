@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\DB;
 class EnseignantMatiereTableSeeder extends Seeder
 {
     public function GetMatiere()
-    {
-        $XMLFichier = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\import-final-21-10-2021.xml';
+    {   
+        $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
         $Matieres = [];
         foreach ( $XmlData->aperiodic[0]->unit as $Matiere) {
@@ -52,7 +52,8 @@ class EnseignantMatiereTableSeeder extends Seeder
 
     }
     public function rendnomprof() {
-        $chemin = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\ID-professeurs.txt';
+       
+        $chemin =  storage_path('app' . DIRECTORY_SEPARATOR . 'ID-professeurs.txt') ;
        $listeprof = file_get_contents($chemin);
        $listeprofexplose = explode(",", $listeprof);
         //dd($listeprofexplose);

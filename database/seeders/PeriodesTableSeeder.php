@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Salle;
 use App\Models\Matiere;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,8 +20,9 @@ class PeriodesTableSeeder extends Seeder
 
     public function run()
     {
+        
         DB::table('periodes')->delete();
-        $XMLFichier = 'C:\Users\Cal89\Documents\heig\Semestre2\ProjetArt\calendrierxml_listeprof\import-final-21-10-2021.xml';
+        $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
         $listedates = [];
         $listedatefin = [];
@@ -29,6 +30,11 @@ class PeriodesTableSeeder extends Seeder
         foreach ($XmlData->aperiodic[0]->unit as $unite){
             foreach ($unite->teaching as $teaching){
         foreach ( $teaching->lesson as $cours) {
+            foreach($cours->rooms->room as $salle){
+                $nomSalle=(string)$salle['name'];
+                
+            }
+            
             //dd($cours['start']);
             $minutesdebut = 510;
             $minutespauseAvant = 0;
@@ -61,6 +67,7 @@ class PeriodesTableSeeder extends Seeder
             $tempsminutesdebut = ($datedebutminutes % 60);
             $tempsheuresfin = intval(floor($datefinminutes / 60));
             $tempsminutesfin = ($datefinminutes % 60);
+            
             //dd($tempsheuresdebut, $tempsminutesdebut,$tempsheuresfin, $tempsminutesfin );
             //dd($cours['date'].' '.$tempsheuresdebut.':'.$tempsminutesdebut);
             $datedebut = strtotime($cours['date'] . ' ' . $tempsheuresdebut . ':' . $tempsminutesdebut);
@@ -74,11 +81,13 @@ class PeriodesTableSeeder extends Seeder
             $classe = (string) $teaching['tag'];
             $nomclasse = $nom."".$classe;
             $matiereId = Matiere::where('nom',$nomclasse)->get('id');
+            $salleID=Salle::where('nom',$nomSalle)->get('id');
             //dd($matiereId[0]->id);
             DB::table('periodes')->insert([
                 'date_debut' => date('Y-m-d h:i', $datedebut),
                 'date_fin' => date('Y-m-d h:i', $datefin),
-                'matiere_id'=> $matiereId[0]->id
+                'matiere_id'=> $matiereId[0]->id,
+                'salle_id'=> $salleID[0]->id
             ]);
 
         }

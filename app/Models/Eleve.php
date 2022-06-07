@@ -5,17 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enseignant extends Model
+class Eleve extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'nom',
+        'prenom',
+        'classe',
+        'taux_absence',
+        'email'
+    ];
 
-    protected $fillable=['nom','prenom', 'email', 'branche'];
-    public function matieres() {
+    public function matiere () {
         return $this->belongsToMany(Matiere::class);
-
     }
     public function taches() {
         return $this->hasMany(Tache_Publique::class);
     }
-
 }

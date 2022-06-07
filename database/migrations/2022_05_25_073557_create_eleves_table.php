@@ -18,7 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('classes');
+            $table->string('classe');
+            $table->integer('taux_absence');
             $table->string('email')->unique();
             $table->string('password');
         });

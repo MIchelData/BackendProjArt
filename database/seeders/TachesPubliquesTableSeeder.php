@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-class TachesPubliqueTableSeeder extends Seeder
+class TachesPubliquesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,31 +16,34 @@ class TachesPubliqueTableSeeder extends Seeder
     {
         DB::table('taches_publique')->delete();
 
-        DB::table('taches_publique')->insert([
+        /* DB::table('taches_publique')->insert([
             'description' => "2 page A4 avec l'ensemble des élèves de la classe",
             'date' => '2020-05-01',
             'duree' => '240',
             'titre' => 'rendu trombinoscope',
-            'id_user' => 1,
-            'type' => 'devoir']);
+            'id_enseignant' => 1,
+            'id_eleve' => 0,
+            'type' => 'devoir']); */
 
 
 
         DB::table('taches_publique')->insert([
-                'description' => 'tout documents autorisés',
-                'date' => '2020-01-01',
+                'description' => "tout documents autorisés",
+                'date' => strtotime("20-06-2022 18:30:23"),
                 'duree' => '240',
-                'titre' => 'examen de prog',
-                'id_user' => 2,
+                'titre' => "examen de prog",
+                'id_enseignant' => 2,
+                'id_eleve' => null,
                 'type' => 'examen']);
         
-                DB::table('taches_publique')->insert([
+                /* DB::table('taches_publique')->insert([
                     'description' => 'tout documents autorisés',
                     'date' => '2020-10-10',
                     'duree' => '60',
                     'titre' => 'Repas canadien comem',
-                    'id_user' => 2,
-                    'type' => 'autre']);
+                    'id_enseignant' => 3,
+                    'id_eleve' => null,
+                    'type' => 'autre']); */
 
     }
 

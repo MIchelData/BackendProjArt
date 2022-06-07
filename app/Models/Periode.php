@@ -15,4 +15,8 @@ class Periode extends Model
         return $this->belongsTo(Matiere::class);
 
     }
+    public function salle() {
+        return $this->belongsTo(Salle::class);
+
+    }
 }
