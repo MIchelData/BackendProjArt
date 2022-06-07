@@ -84,8 +84,8 @@ class PeriodesTableSeeder extends Seeder
             $salleID=Salle::where('nom',$nomSalle)->get('id');
             //dd($matiereId[0]->id);
             DB::table('periodes')->insert([
-                'date_debut' => date('Y-m-d h:i', $datedebut),
-                'date_fin' => date('Y-m-d h:i', $datefin),
+                'date_debut' => $datedebut,
+                'date_fin' =>  $datefin,
                 'matiere_id'=> $matiereId[0]->id,
                 'salle_id'=> $salleID[0]->id
             ]);
