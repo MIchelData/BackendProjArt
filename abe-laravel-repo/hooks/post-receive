@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+echo Checking out latest version...
+export GIT_DIR=/home/projart/2022/49/abe/abe-laravel-repo
+export GIT_WORK_TREE=/home/projart/2022/49/abe/abe-laravel
+git checkout -f main
+cd "$GIT_WORK_TREE"
