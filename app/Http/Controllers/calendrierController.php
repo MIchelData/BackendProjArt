@@ -135,17 +135,17 @@ public function getCoursTachesEleves(){ //permet d'afficher les cours dans l'ord
     $horaireJSON = json_encode($listehoraires);
     echo($horaireJSON);
 
-    foreach($horaireJSON as $periode){
-        dd($periode);
-            echo($periode->matiere);
-            echo(" ");
-            echo($periode->date_debut);
-            echo(" ");
-            echo($periode->date_fin);
-            echo(" ");
-            echo($periode->salle);
-            echo('<br><br>');
-    }
+   // foreach($horaireJSON as $periode){
+    //    dd($periode);
+      //      echo($periode->matiere);
+      //      echo(" ");
+      //      echo($periode->date_debut);
+       //     echo(" ");
+        //    echo($periode->date_fin);
+         //   echo(" ");
+         //   echo($periode->salle);
+         //   echo('<br><br>');
+    //}
 
     }
 }
