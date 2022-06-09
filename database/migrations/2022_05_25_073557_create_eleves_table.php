@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('nom');
             $table->string('prenom');
             $table->string('classe');
             $table->integer('taux_absence');
             $table->string('email')->unique();
             $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

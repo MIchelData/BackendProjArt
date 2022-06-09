@@ -2,6 +2,26 @@
 
 return [
 
+  /*   'eleves' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Eleve::class,
+    ],
+ 
+    'eleves' => [
+        'provider' => 'eleves',
+        'table' => 'password_resets',
+        'expire' => 60,
+    ],
+    'enseignants' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Enseignant::class,
+    ],
+    'enseignants' => [
+        'provider' => 'enseignants',
+        'table' => 'password_resets',
+        'expire' => 60,
+    ], */
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -14,8 +34,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'enseignant',
+        'passwords' => 'enseignants',
     ],
 
     /*
@@ -36,9 +56,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        /* 'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'eleves',
+        ], */
+        'eleve' => [
+            'driver' => 'session',
+            'provider' => 'eleves',
+        ],
+        'enseignant' => [
+            'driver' => 'session',
+            'provider' => 'enseignants',
         ],
     ],
 
@@ -60,9 +88,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        /* 'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ], */
+        'eleves' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Eleve::class,
+        ],
+        'enseignants' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Enseignant::class,
         ],
 
         // 'users' => [
@@ -87,8 +123,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'eleves' => [
+            'provider' => 'eleves',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'enseignants' => [
+            'provider' => 'enseignants',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

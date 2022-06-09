@@ -51,7 +51,7 @@ class MatieresTableSeeder extends Seeder
                // dd($matiereexplose[0][0]);
                 $nommatiere = (string) $matiereexplose[0];
                // dd($nommatiere);
-                $nommatiereclasse[] =$nommatiere."".$teaching['tag'];
+                $nommatiereclasse[] =$nommatiere."-".$teaching['tag'];
                 
 
             }

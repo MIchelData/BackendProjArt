@@ -16,14 +16,14 @@ class TachesPubliquesTableSeeder extends Seeder
     {
         DB::table('taches_publique')->delete();
 
-        /* DB::table('taches_publique')->insert([
+        DB::table('taches_publique')->insert([
             'description' => "2 page A4 avec l'ensemble des élèves de la classe",
-            'date' => '2020-05-01',
+            'date' => strtotime("20-07-2022 18:30:23"),
             'duree' => '240',
             'titre' => 'rendu trombinoscope',
             'id_enseignant' => 1,
-            'id_eleve' => 0,
-            'type' => 'devoir']); */
+            'id_eleve' => null,
+            'type' => 'devoir']);
 
 
 
@@ -34,6 +34,7 @@ class TachesPubliquesTableSeeder extends Seeder
                 'titre' => "examen de prog",
                 'id_enseignant' => 2,
                 'id_eleve' => null,
+<<<<<<< Updated upstream
                 'type' => 'examen',
                 'id_matiere'=> 8,
 
@@ -52,19 +53,23 @@ class TachesPubliquesTableSeeder extends Seeder
         ]);
 
 
+=======
+                'type' => 'examen']);
+        
+                DB::table('taches_publique')->insert([
+                    'description' => "tout documents autorisés",
+                    'date' => strtotime("2020-10-10 18:30:23"),
+                    'duree' => '60',
+                    'titre' => 'Repas canadien comem',
+                    'id_enseignant' => null,
+                    'id_eleve' => 1,
+                    'type' => 'autre']);
+>>>>>>> Stashed changes
 
     }
 
 
-    /* $table->increments('id');
-    $table->timestamps();
-    $table->string('type');
-    $table->date('date');
-    $table->integer('duree');
-    $table->string('description');
-    $table->string('titre');
-    $table->foreignId('id_user')->constrained('users');
-}); */
+    
 
 
 
