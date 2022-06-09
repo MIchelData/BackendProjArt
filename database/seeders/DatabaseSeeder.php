@@ -33,8 +33,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(ElevesTableSeeder::class);
       $this->call(TachesPubliquesTableSeeder::class); 
 
-         //$this->call(TachesPubliquesTableSeeder::class);
-
 
       //  $this->call(MatieresTableSeeder::class);
 
