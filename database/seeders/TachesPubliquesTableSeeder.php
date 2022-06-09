@@ -30,20 +30,28 @@ class TachesPubliquesTableSeeder extends Seeder
         DB::table('taches_publique')->insert([
                 'description' => "tout documents autorisés",
                 'date' => strtotime("20-06-2022 18:30:23"),
-                'duree' => '240',
+                'duree' => 240,
                 'titre' => "examen de prog",
                 'id_enseignant' => 2,
                 'id_eleve' => null,
-                'type' => 'examen']);
-        
-                /* DB::table('taches_publique')->insert([
-                    'description' => 'tout documents autorisés',
-                    'date' => '2020-10-10',
-                    'duree' => '60',
-                    'titre' => 'Repas canadien comem',
-                    'id_enseignant' => 3,
-                    'id_eleve' => null,
-                    'type' => 'autre']); */
+                'type' => 'examen',
+                'id_matiere'=> 8,
+
+        ]);
+
+        DB::table('taches_publique')->insert([
+            'description' => "bord du lac",
+            'date' => strtotime("25-06-2022 16:30:00"),
+            'duree' => 240,
+            'titre' => "apéro",
+            'id_enseignant' => null,
+            'id_eleve' => 1,
+            'type' => 'autre',
+            'id_matiere'=> null,
+
+        ]);
+
+
 
     }
 

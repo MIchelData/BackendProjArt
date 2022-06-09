@@ -20,7 +20,7 @@ class PeriodesTableSeeder extends Seeder
 
     public function run()
     {
-        
+
         DB::table('periodes')->delete();
         $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
@@ -32,9 +32,9 @@ class PeriodesTableSeeder extends Seeder
         foreach ( $teaching->lesson as $cours) {
             foreach($cours->rooms->room as $salle){
                 $nomSalle=(string)$salle['name'];
-                
+
             }
-            
+
             //dd($cours['start']);
             $minutesdebut = 510;
             $minutespauseAvant = 0;
@@ -67,7 +67,7 @@ class PeriodesTableSeeder extends Seeder
             $tempsminutesdebut = ($datedebutminutes % 60);
             $tempsheuresfin = intval(floor($datefinminutes / 60));
             $tempsminutesfin = ($datefinminutes % 60);
-            
+
             //dd($tempsheuresdebut, $tempsminutesdebut,$tempsheuresfin, $tempsminutesfin );
             //dd($cours['date'].' '.$tempsheuresdebut.':'.$tempsminutesdebut);
             $datedebut = strtotime($cours['date'] . ' ' . $tempsheuresdebut . ':' . $tempsminutesdebut);
@@ -84,8 +84,8 @@ class PeriodesTableSeeder extends Seeder
             $salleID=Salle::where('nom',$nomSalle)->get('id');
             //dd($matiereId[0]->id);
             DB::table('periodes')->insert([
-                'date_debut' => date('Y-m-d h:i', $datedebut),
-                'date_fin' => date('Y-m-d h:i', $datefin),
+                'date_debut' => $datedebut,  // date('Y-m-d h:i', $datedebut)
+                'date_fin' =>  $datefin, //  date('Y-m-d h:i', $datefin)
                 'matiere_id'=> $matiereId[0]->id,
                 'salle_id'=> $salleID[0]->id
             ]);

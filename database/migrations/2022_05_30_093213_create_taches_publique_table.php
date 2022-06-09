@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('titre');
             $table->foreignId('id_eleve')->nullable()->constrained('eleves');
             $table->foreignId('id_enseignant')->nullable()->constrained('enseignants');
+            $table->foreignId('id_matiere')->nullable()->constrained('matieres');
     });
 }
 
