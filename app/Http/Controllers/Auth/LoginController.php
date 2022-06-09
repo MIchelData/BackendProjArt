@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -55,9 +55,11 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
         if (auth()->guard('eleve')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/home');
+            //dd('eleve');
+            return redirect()->intended('home');
         } elseif (auth()->guard('enseignant')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/calendrier');
+            //dd('prof');
+            return redirect()->intended('home');
         } else {
             return back()->withErrors(['email' => 'Email or Password is incorrect.']);
         }
