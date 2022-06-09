@@ -20,4 +20,8 @@ class Matiere extends Model
     public function eleves(){
         return $this->belongsToMany(Eleve::class);
     }
+
+    public function taches() {
+        return $this->hasMany(Tache_Publique::class);
+    }
 }

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tache_Publique extends Model
 {
     use HasFactory;
-    //proteger la table
-    protected $table = 'taches_publiques';
+
+    protected $table = 'taches_publique';
     protected $fillable=['type','date','duree','description','titre','id_enseignant'];
 
     public function matieres() {
@@ -21,6 +21,9 @@ class Tache_Publique extends Model
     }
     public function eleves() {
         return $this->belongsTo(eleve::class);
+    }
+    public function taches(){
+        return $this->belongsTo(Matiere::class);
     }
 
 

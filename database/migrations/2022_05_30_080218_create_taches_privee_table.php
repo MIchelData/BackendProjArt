@@ -20,10 +20,8 @@ return new class extends Migration
             $table->integer('date');
             $table->integer('duree');
             $table->text('description');
-            $table->integer('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            $table->foreignId('id_eleve')->nullable()->constrained('eleves');
+
         });
     }
 

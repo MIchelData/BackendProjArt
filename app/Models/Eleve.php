@@ -19,7 +19,12 @@ class Eleve extends Model
     public function matiere () {
         return $this->belongsToMany(Matiere::class);
     }
-    public function taches() {
+    public function tachespublique() {
         return $this->hasMany(Tache_Publique::class);
     }
+
+    public function tachesprivee() {
+        return $this->hasMany(Tache_Privee::class);
+    }
+
 }
