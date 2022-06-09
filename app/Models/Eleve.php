@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Eleve extends Model
+class Eleve extends Authenticatable
 {
     use HasFactory;
+    use Notifiable;
+    protected $guard = 'eleve';
+    protected $table = 'eleves';
     protected $fillable=[
         'nom',
         'prenom',
@@ -15,6 +20,15 @@ class Eleve extends Model
         'taux_absence',
         'email'
     ];
+
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+    public function getAuthPassword()
+    {
+      return $this->password;
+    }
 
     public function matiere () {
         return $this->belongsToMany(Matiere::class);
@@ -28,3 +42,6 @@ class Eleve extends Model
     }
 
 }
+
+
+

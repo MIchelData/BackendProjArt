@@ -16,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< Updated upstream
 Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
+=======
+Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCalendrier']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+>>>>>>> Stashed changes

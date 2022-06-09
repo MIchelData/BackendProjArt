@@ -21,6 +21,20 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+<<<<<<< Updated upstream
+=======
+         
+         //$this->call(TachesPubliquesTableSeeder::class); 
+        
+        //$this->call(ClasseTableSeeder::class);
+        //$this->call(MatieresTableSeeder::class);
+        //$this->call(PeriodesTableSeeder::class);
+        //$this->call(sallesTableSeeder::class);
+        //$this->call(EnseignantMatiereTableSeeder::class);  
+        //$this->call(EnseignantsTableSeeder::class);
+        //$this->call(ElevesTableSeeder::class);
+      $this->call(TachesPubliquesTableSeeder::class); 
+>>>>>>> Stashed changes
 
          //$this->call(TachesPubliquesTableSeeder::class);
 
