@@ -22,8 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-         //$this->call(TachesPubliquesTableSeeder::class);
-
 
       //  $this->call(MatieresTableSeeder::class);
 
