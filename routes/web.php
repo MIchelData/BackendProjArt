@@ -19,6 +19,7 @@ Route::get('/', function () {
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCalendrier']);
+Route::view('/horaire', 'horaireview');
 
 Auth::routes();
 

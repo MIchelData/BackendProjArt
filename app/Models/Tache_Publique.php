@@ -9,7 +9,7 @@ class Tache_Publique extends Model
 {
     use HasFactory;
     //proteger la table
-    protected $table = 'taches_publiques';
+    protected $table = 'taches_publique';
     protected $fillable=['type','date','duree','description','titre','id_enseignant','id_eleve'];
 
     public function matieres() {

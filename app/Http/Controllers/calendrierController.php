@@ -6,6 +6,8 @@ use App\Models\Eleve;
 use App\Models\Matiere;
 use App\Models\Periode;
 use App\Models\Salle;
+use App\Models\Tache_Privee;
+use App\Models\Tache_Publique;
 use Illuminate\Http\Request;
 use App\Models\Enseignant;
 class instancehoraire
@@ -86,7 +88,10 @@ public function getCoursTachesEleves(){ //permet d'afficher les cours dans l'ord
     $listeIdCours = array();
         $etudiantmatiere = Eleve::findOrFail(2)->matiere;
                     //orderBy('nbSecondes','ASC')->get();
+
+
         foreach ($etudiantmatiere as $etumat){
+
             array_push($listeIdCours,$etumat->id);
            // $periodes = Matiere::where('id',200)->periodes->get;
            // dd($periodes);
@@ -131,6 +136,19 @@ public function getCoursTachesEleves(){ //permet d'afficher les cours dans l'ord
         return $a->date_debut - $b->date_debut;
      });
     //dd($listehoraires);
+$tacheprivee = Tache_Privee::where('id_eleve', 1)->get();
+//dd($tacheprivee);
+if(count($tacheprivee)!=0){
+   // dd($tacheprivee);
+}
+$tachepublique = array();
+//$listetest = ["0","1","2","8"];
+foreach ($listeIdCours as $idcours){
+    $tachepublique[] = Tache_Publique::where('id_matiere', $idcours)->get();
+}
+
+
+//dd($tachepublique);
 
     $horaireJSON = json_encode($listehoraires);
     echo($horaireJSON);
