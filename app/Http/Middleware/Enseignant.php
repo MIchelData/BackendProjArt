@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Enseignant
 {
@@ -17,9 +18,12 @@ class Enseignant
      */
     public function handle(Request $request, Closure $next)
     {
+       // Auth::guard('enseignant');
         if($request->user()->auth()){
+
             return $next($request);
         }
-        return new RedirectResponse(url('test'));
+
+        return new RedirectResponse(url('/home'));
     }
 }

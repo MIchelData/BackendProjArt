@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Http\Controllers;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//routes public
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//routes privées
+Route::group(['middleware'=>['auth:sanctum']],function () {
+    Route::get('horaireactuelle', [\App\Http\Controllers\Api\HoraireController::class, 'index']);
+    Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
-Route::get('horaireactuelle', [\App\Http\Controllers\Api\HoraireController::class, 'index']);
+
 
 

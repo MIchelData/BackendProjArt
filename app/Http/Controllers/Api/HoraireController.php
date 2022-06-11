@@ -22,24 +22,26 @@ class instancehoraire2
 }
 class HoraireController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $listehoraires = array();
-        $enseignantMatiere = Enseignant::findOrFail(10)->matieres;
+        $id =  $request->user()->id;
+        $enseignantMatiere = Enseignant::findOrFail($id)->matieres;
 
         foreach ($enseignantMatiere as $ensma ){
-            echo ($ensma->nom);
+           // echo ($ensma->nom);
             $matiereId = $ensma->id;
-            echo('<br><br>');
+            //echo('<br><br>');
             $periodematiere = Matiere::findOrFail($matiereId)->periodes()->get();
+
             //dd($periodematiere[0]->date_debut);
             foreach ($periodematiere as $key => $permat){
                 //      dd($permat);
-                echo($ensma->nom);
-                echo(" ");
-                echo($permat->date_debut);
-                echo(" ");
-                echo($permat->date_fin);
-                echo('<br><br>');
+               // echo($ensma->nom);
+               // echo(" ");
+               // echo($permat->date_debut);
+               // echo(" ");
+               // echo($permat->date_fin);
+               // echo('<br><br>');
                 $salle = Salle::findOrFail($permat->salle_id)->nom;
                 $tabcours= explode("M", $ensma->nom);
                 $classe = "M".$tabcours[count($tabcours)-1];
@@ -57,8 +59,8 @@ class HoraireController extends Controller
 
         }
         $horaireJSON = json_encode($listehoraires);
-        echo($horaireJSON);
-        return view('horaireview', compact('horaireJSON'));
+       // echo($horaireJSON);
+        return $horaireJSON;
     }
 
 }

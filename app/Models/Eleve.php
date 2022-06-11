@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Eleve extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use HasApiTokens;
     protected $guard = 'eleve';
     protected $table = 'eleves';
     protected $fillable=[

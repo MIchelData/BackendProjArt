@@ -9,11 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Enseignant extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use HasApiTokens;
     protected $table = 'enseignants';
     protected $guard = 'enseignant';
     protected $fillable=['nom','prenom', 'email', 'branche'];

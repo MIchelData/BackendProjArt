@@ -13,16 +13,36 @@ use Illuminate\Http\Request;
 use App\Models\Enseignant;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class instancehoraire
 {
-    public $matiere;
-    public $date_debut;
-    public $date_fin;
-    public $salle;
+    public $id;
+    public $classe;
+    public $title;
+    public $startDate;
+    public $endDate;
+    public $localisation;
+    public $typeEvent;
+    public $description;
+    public $event;
 }
 class calendrierController extends Controller
 {
+
+    public function tripardate($array) {
+        usort($array, function($a, $b) {
+            return $a->startDate - $b->endDate;
+        });
+        return $array;
+    }
+
+    public function nommatieretonomclasse($nommatiere){
+        $tabcours= explode("M", $nommatiere);
+        $classe = "M".$tabcours[count($tabcours)-1];
+        return $classe;
+    }
+
     public function getCalendrier(Enseignant $enseignant){
         $file = storage_path('app/horaire' . DIRECTORY_SEPARATOR . 'Horaire_M48_S2_2021_2022.ics') ;
         $calendrier = file_get_contents($file);
@@ -75,18 +95,54 @@ $listehoraires = array();
            echo($permat->date_fin);
            echo('<br><br>');
            $salle = Salle::findOrFail($permat->salle_id)->nom;
-
-           $horaireDufour = new instancehoraire();
-           $horaireDufour -> matiere = $ensma->nom;
-           $horaireDufour -> date_debut = $permat->date_debut;
-           $horaireDufour -> date_fin = $permat->date_fin;
-           $horaireDufour -> salle = $salle;
-           $listehoraires[] = $horaireDufour;
+           $tabcours= explode("M", $ensma->nom);
+           $classe = "M".$tabcours[count($tabcours)-1];
+           $nom = $ensma->nom;
+           $nom = str_replace($classe,"", $nom);
+           $horaireprof = new instancehoraire();
+           $horaireprof -> id = $ensma->id;
+           $horaireprof -> classe = $classe;
+           $horaireprof -> title = $nom;
+           $horaireprof -> startDate = $permat->date_debut; //date('c', $permat->date_debut );
+           $horaireprof -> endDate = $permat->date_fin; //date('c', $permat->date_debut );
+           $horaireprof -> localisation = $salle;
+           $horaireprof -> typeEvent = "course";
+           $horaireprof -> description = "";
+           $horaireprof -> event = "";
+           $listehoraires[] = $horaireprof;
        }
 
     }
-    $horaireJSON = json_encode($listehoraires);
-    echo($horaireJSON);
+
+
+
+    //dd($enseignant->id());
+    $listetachespublic = DB::table('taches_publique')
+        ->where('id_enseignant', $enseignant->id())
+        ->get();
+    foreach ($listetachespublic as $tachepublic){
+$idmatiere = $tachepublic->id_matiere;
+        $classe = Matiere::where("id",$idmatiere)->get();
+        $classe = $classe[0]->nom;
+        $classe = $this->nommatieretonomclasse($classe);
+        $tachepublicsprof = new instancehoraire();
+        $tachepublicsprof -> id = $tachepublic->id;
+        $tachepublicsprof -> classe = $classe;
+        $tachepublicsprof -> title = $tachepublic->nom;
+        $tachepublicsprof -> startDate = $tachepublic->date_debut;
+        $tachepublicsprof -> endDate = $tachepublic->date_debut+($tachepublic->duree*60);
+        $tachepublicsprof-> localisation = "T153";
+        $tachepublicsprof-> typeEvent = $tachepublicsprof->type;
+        $tachepublicsprof-> description = $tachepublicsprof->description;
+        $tachepublicsprof-> event = "";
+        $listehoraires [] = $tachepublicsprof;
+        }
+        usort($listehoraires, function($a, $b) {
+            return $a->startDate - $b->endDate;
+        });
+        // dd($listehoraires);
+        $horaireJSON = json_encode($listehoraires);
+        echo($horaireJSON);
 
 }
 
