@@ -6,7 +6,7 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Eleve::class,
     ],
- 
+
     'eleves' => [
         'provider' => 'eleves',
         'table' => 'password_resets',
@@ -34,8 +34,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'enseignant',
-        'passwords' => 'enseignants',
+        'guard' => 'eleve',
+        'passwords' => 'eleves',
     ],
 
     /*

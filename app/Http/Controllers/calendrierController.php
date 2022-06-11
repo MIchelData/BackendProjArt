@@ -8,8 +8,12 @@ use App\Models\Periode;
 use App\Models\Salle;
 use App\Models\Tache_Privee;
 use App\Models\Tache_Publique;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Enseignant;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+
 class instancehoraire
 {
     public $matiere;
@@ -19,7 +23,7 @@ class instancehoraire
 }
 class calendrierController extends Controller
 {
-    public function getCalendrier(){
+    public function getCalendrier(Enseignant $enseignant){
         $file = storage_path('app/horaire' . DIRECTORY_SEPARATOR . 'Horaire_M48_S2_2021_2022.ics') ;
         $calendrier = file_get_contents($file);
         dd($calendrier);
@@ -46,13 +50,15 @@ class calendrierController extends Controller
             }
 
          }
-        dd($nomcours);
+        dd($enseignant);
 
     }
 
     public function getCoursEnseignant(){
+        $enseignant = Auth::guard('enseignant');
+       // dd($enseignant->id());
 $listehoraires = array();
-    $enseignantMatiere = Enseignant::findOrFail(10)->matieres;
+    $enseignantMatiere = Enseignant::findOrFail($enseignant->id())->matieres;
 
         foreach ($enseignantMatiere as $ensma ){
         echo ($ensma->nom);
@@ -81,9 +87,10 @@ $listehoraires = array();
     }
     $horaireJSON = json_encode($listehoraires);
     echo($horaireJSON);
+
 }
 
-public function getCoursTachesEleves(){ //permet d'afficher les cours dans l'ordre
+public function getCoursTachesEleves($enseignant){ //permet d'afficher les cours dans l'ordre
 
     $listeIdCours = array();
         $etudiantmatiere = Eleve::findOrFail(2)->matiere;
@@ -143,16 +150,23 @@ if(count($tacheprivee)!=0){
 }
 $tachepublique = array();
 //$listetest = ["0","1","2","8"];
+
 foreach ($listeIdCours as $idcours){
-    $tachepublique[] = Tache_Publique::where('id_matiere', $idcours)->get();
+    $latache = Tache_Publique::where('id_matiere', $idcours)->get();
+    if(count($latache)>0){
+        $tachepublique[] = Tache_Publique::where('id_matiere', $idcours)->get();
+    }
+
+
 }
 
 
-//dd($tachepublique);
+
 
     $horaireJSON = json_encode($listehoraires);
     echo($horaireJSON);
 
+dd($enseignant);
    // foreach($horaireJSON as $periode){
     //    dd($periode);
       //      echo($periode->matiere);

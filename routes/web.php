@@ -17,8 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
-Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
+Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves'])->middleware('enseignant');
 Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCalendrier']);
+Route::get('/help', [\App\Http\Controllers\calendrierController::class, 'getCoursEnseignant']);
 Route::view('/horaire', 'horaireview');
 
 Auth::routes();
