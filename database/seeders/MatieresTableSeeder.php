@@ -17,7 +17,7 @@ class MatieresTableSeeder extends Seeder
      * @return void
      */
     public function GetMatiere()
-    {  
+    {
         $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
         /* dd($XmlData->unit[2]['abbreviation'] . "<br>");
@@ -51,14 +51,14 @@ class MatieresTableSeeder extends Seeder
                // dd($matiereexplose[0][0]);
                 $nommatiere = (string) $matiereexplose[0];
                // dd($nommatiere);
-                $nommatiereclasse[] =$nommatiere."-".$teaching['tag'];
-                
+                $nommatiereclasse[] =$nommatiere."".$teaching['tag'];
+
 
             }
 
 
         }
-       
+
         //dd($matiereexplose);
         //dd($nommatiereclasse);
 
@@ -66,20 +66,20 @@ class MatieresTableSeeder extends Seeder
 
 
         /* foreach($matiereListe as $m){
-        for ($i=1; $i <4 ; $i++) { 
-            
+        for ($i=1; $i <4 ; $i++) {
+
                 $matiereListe2[]="M".$classe."_".$noclasse."_".$m[0];
                 $noclasse++;
                 $classe++;
-            
-            
+
+
         }
         $classe=49;
         $noclasse=1;
     } */
-      
-       
-        
+
+
+
         /* $matiereListe=explode(" ",$Matieres[0]); */
        // dd($matiereListe2);
         return $nommatiereclasse;

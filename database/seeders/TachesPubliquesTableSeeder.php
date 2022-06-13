@@ -34,7 +34,6 @@ class TachesPubliquesTableSeeder extends Seeder
                 'titre' => "examen de prog",
                 'id_enseignant' => 2,
                 'id_eleve' => null,
-<<<<<<< Updated upstream
                 'type' => 'examen',
                 'id_matiere'=> 8,
 
@@ -49,13 +48,8 @@ class TachesPubliquesTableSeeder extends Seeder
             'id_eleve' => 1,
             'type' => 'autre',
             'id_matiere'=> null,
+            'type' => 'examen']);
 
-        ]);
-
-
-=======
-                'type' => 'examen']);
-        
                 DB::table('taches_publique')->insert([
                     'description' => "tout documents autorisés",
                     'date' => strtotime("2020-10-10 18:30:23"),
@@ -64,12 +58,12 @@ class TachesPubliquesTableSeeder extends Seeder
                     'id_enseignant' => null,
                     'id_eleve' => 1,
                     'type' => 'autre']);
->>>>>>> Stashed changes
+
 
     }
 
 
-    
+
 
 
 

@@ -30,21 +30,27 @@ class DatabaseSeeder extends Seeder
         //$this->call(sallesTableSeeder::class);
         //$this->call(EnseignantMatiereTableSeeder::class);
         //$this->call(EnseignantsTableSeeder::class);
-        //$this->call(ElevesTableSeeder::class);
+
      // $this->call(TachesPubliquesTableSeeder::class);
 
 
 
 
         //$this->call(ClasseTableSeeder::class);
-        //$this->call(MatieresTableSeeder::class);
-     //  $this->call(PeriodesTableSeeder::class);
-       // $this->call(sallesTableSeeder::class);
-        $this->call(EnseignantMatiereTableSeeder::class);
-      //  $this->call(EleveMatiereTableSeeder::class);
-       // $this->call(EnseignantsTableSeeder::class);
+      //  $this->call(MatieresTableSeeder::class);
+      //  $this->call(EnseignantsTableSeeder::class);
+      //  $this->call(EnseignantMatiereTableSeeder::class);
+      //  $this->call(ElevesTableSeeder::class);
+     //   $this->call(EleveMatiereTableSeeder::class);
+      //   $this->call(sallesTableSeeder::class);
+      // $this->call(PeriodesTableSeeder::class);
 
-     // $this->call(TachesPubliquesTableSeeder::class);
+
+
+
+
+      $this->call(TachesPubliquesTableSeeder::class);
+      $this->call(TachePriveeTableSeeder::class);
           //$this->call(ElevesTableSeeder::class);
 
 

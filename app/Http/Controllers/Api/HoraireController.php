@@ -29,15 +29,20 @@ class HoraireController extends Controller
     public function index(Request $request){
         $listehoraires = array();
         $id =  $request->user()->id;
-       // dd($request->user());
-        if($request->user()->table=="enseignant") {
+      //  if(Enseignant::where("email",$request->user()->email)->get()){
+     //       dd($request->user()->email);
+     //   }
 
+       // dd($request->user());
+       // dd(count((Enseignant::where("email",$request->user()->email)->get())));
+        if(count(Enseignant::where("email",$request->user()->email)->get())!=0){
 
             $enseignantMatiere = Enseignant::findOrFail($id)->matieres;
 
             foreach ($enseignantMatiere as $ensma) {
                 // echo ($ensma->nom);
                 $matiereId = $ensma->id;
+
                 //echo('<br><br>');
                 $periodematiere = Matiere::findOrFail($matiereId)->periodes()->get();
 
@@ -64,12 +69,13 @@ class HoraireController extends Controller
                     $horaireenseignant->description = "";
                     $listehoraires[] = $horaireenseignant;
                 }
-
+           // dd($listehoraires);
             }
         }else{
 
             $listeIdCours = array();
             $id = $request->user()->id;
+
             $etudiantmatiere = Eleve::findOrFail($id)->matiere;
             //orderBy('nbSecondes','ASC')->get();
 
@@ -102,6 +108,7 @@ class HoraireController extends Controller
             $listehoraires = array();
 
             foreach ($listeCours as $key => $cours){
+
                 foreach ($cours as $cour){
 
                     $salleH = Salle::where('id', $cour->salle_id)->get('nom');
@@ -118,16 +125,17 @@ class HoraireController extends Controller
                     $listehoraires[] = $horaire;
                 }
             }
+            dd("bonjour");
             //dd($listehoraires);
           //  usort($listehoraires, function($a, $b) {
            //     return $a->startDate - $b->endDate;
           //  });
 
-            $tacheprivee = Tache_Privee::where('id_eleve', 1)->get();
+           // $tacheprivee = Tache_Privee::where('id_eleve', 1)->get();
 
-            if(count($tacheprivee)!=0){
+          //  if(count($tacheprivee)!=0){
                 // dd($tacheprivee);
-            }
+           // }
             $tachepublique = array();
 
 
@@ -144,16 +152,16 @@ class HoraireController extends Controller
 
             foreach ($tachepublique[0] as $tachepub){
                 $matiere = Matiere::where('id', $tachepub->id_matiere);
-                dd($matiere);
+                //dd($matiere);
                 $tabcours = explode("M", $matiere->nom);
                 $classe = "M" . $tabcours[count($tabcours) - 1];
-                dd($classe);
+              //  dd($classe);
              $horairetachepub = new instancehoraire2();
             $horairetachepub->id = $tachepub->id;
              $horairetachepub->classe = $classe;
             }
 
-            dd($listetitretachepublique);
+          //  dd($listetitretachepublique);
         }
         $horaireJSON = json_encode($listehoraires);
        // echo($horaireJSON);

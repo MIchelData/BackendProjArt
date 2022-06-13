@@ -20,19 +20,19 @@ class PeriodesTableSeeder extends Seeder
 
     public function run()
     {
-
+$i=0;
         DB::table('periodes')->delete();
         $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
         $listedates = [];
         $listedatefin = [];
         /* dd($XmlData->aperiodic[0]->unit->{'abbreviation'}); */
+       // dd($XmlData->aperiodic[0]);
         foreach ($XmlData->aperiodic[0]->unit as $unite){
             foreach ($unite->teaching as $teaching){
         foreach ( $teaching->lesson as $cours) {
             foreach($cours->rooms->room as $salle){
                 $nomSalle=(string)$salle['name'];
-
             }
 
             //dd($cours['start']);
@@ -82,7 +82,9 @@ class PeriodesTableSeeder extends Seeder
             $nomclasse = $nom."".$classe;
             $matiereId = Matiere::where('nom',$nomclasse)->get('id');
             $salleID=Salle::where('nom',$nomSalle)->get('id');
-            //dd($matiereId[0]->id);
+           // dd($nomclasse);
+           // dd(Matiere::where('nom', "AnalysMar-M50-1")->get('id'));
+
             DB::table('periodes')->insert([
 
                 'date_debut' => $datedebut,  // date('Y-m-d h:i', $datedebut)
@@ -93,7 +95,10 @@ class PeriodesTableSeeder extends Seeder
                 'matiere_id'=> $matiereId[0]->id,
                 'salle_id'=> $salleID[0]->id
             ]);
+           // if($i=10){
 
+          //  }
+        $i++;
         }
         }
         }
