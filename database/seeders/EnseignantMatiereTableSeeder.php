@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class EnseignantMatiereTableSeeder extends Seeder
 {
     public function GetMatiere()
-    {   
+    {
         $XMLFichier = storage_path('app' . DIRECTORY_SEPARATOR . 'import-final-21-10-2021.xml') ;
         $XmlData = simplexml_load_file($XMLFichier) or die("Failed to load");
         $Matieres = [];
@@ -33,13 +33,27 @@ class EnseignantMatiereTableSeeder extends Seeder
             $currentunit = $currentunit[0];
             unset($classes);
             unset($profs);
-            foreach ($unite->teaching as $teaching){
+            foreach ($unite->teaching as $key => $teaching){
                 $classes[] = (string) $teaching['tag'];
+                    $pb = false;
                     if($teaching->lesson[0]->teachers->teacher!=null) {
                         $profs[] = (string)$teaching->lesson[0]->teachers->teacher['idisa'];
+                        $pb = true;
                     }else{
+                        foreach($teaching->lesson as $lesson){
+                            if($lesson->teachers->teacher!= null) {
+                                dd("oui",(string)$lesson->teachers->teacher['idisa']);
+                                $profs[] = (string)$lesson->teachers->teacher['idisa'];
+                                $pb= true;
+                            }
+                        }
+
+                    }
+                    if($pb==false){
                         $profs[] = "";
                     }
+
+
             }
 
             array_push($listecomplete,array($currentunit, $classes, $profs));
@@ -52,7 +66,7 @@ class EnseignantMatiereTableSeeder extends Seeder
 
     }
     public function rendnomprof() {
-       
+
         $chemin =  storage_path('app' . DIRECTORY_SEPARATOR . 'ID-professeurs.txt') ;
        $listeprof = file_get_contents($chemin);
        $listeprofexplose = explode(",", $listeprof);
