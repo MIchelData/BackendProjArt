@@ -56,10 +56,10 @@ class LoginController extends Controller
         ]);
         if (auth()->guard('eleve')->attempt(['email' => $request->email, 'password' => $request->password])) {
             //dd('eleve');
-            return redirect()->intended('home');
+            return redirect()->intended('app');
         } elseif (auth()->guard('enseignant')->attempt(['email' => $request->email, 'password' => $request->password])) {
             //dd('prof');
-            return redirect()->intended('home');
+            return redirect()->intended('app');
         } else {
             return back()->withErrors(['email' => 'Email or Password is incorrect.']);
         }
@@ -101,7 +101,7 @@ class LoginController extends Controller
     ]);
     if (Auth::guard('enseignant')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
         return $this->redirectTo = RouteServiceProvider::HOME;
-    }// blogg 
+    }// blogg
     return back()->withInput($request->only('email', 'remember'));
 } */
 /* public function showBloggerLoginForm()

@@ -14,7 +14,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect("/app");
+});
+Route::get('/user/info', function(){
+    if(Auth::check()){
+        return response()->json(Auth::user());
+    }else{
+        return response()->json("anonyme");
+    }
+
 });
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 //Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves'])->middleware('enseignant');
