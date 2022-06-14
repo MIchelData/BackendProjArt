@@ -23,6 +23,7 @@ class TachesPubliquesTableSeeder extends Seeder
             'titre' => 'rendu trombinoscope',
             'id_enseignant' => 1,
             'id_eleve' => null,
+            'classe' => "M49-1",
             'type' => 'devoir']);
 
 
@@ -34,6 +35,7 @@ class TachesPubliquesTableSeeder extends Seeder
                 'titre' => "examen de prog",
                 'id_enseignant' => 2,
                 'id_eleve' => null,
+                'classe' => "M50-2",
                 'type' => 'examen',
                 'id_matiere'=> 8,
 
@@ -47,6 +49,7 @@ class TachesPubliquesTableSeeder extends Seeder
             'id_enseignant' => null,
             'id_eleve' => 1,
             'type' => 'autre',
+            'classe' => "M50-3",
             'id_matiere'=> null,
             'type' => 'examen']);
 
@@ -57,6 +60,7 @@ class TachesPubliquesTableSeeder extends Seeder
                     'titre' => 'Repas canadien comem',
                     'id_enseignant' => null,
                     'id_eleve' => 1,
+                    'classe' => "M48",
                     'type' => 'autre']);
 
 

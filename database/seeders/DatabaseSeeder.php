@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
 
 
       $this->call(TachesPubliquesTableSeeder::class);
-      $this->call(TachePriveeTableSeeder::class);
+     // $this->call(TachePriveeTableSeeder::class);
           //$this->call(ElevesTableSeeder::class);
 
 

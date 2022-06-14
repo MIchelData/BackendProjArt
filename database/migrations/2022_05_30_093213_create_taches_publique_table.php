@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('duree');
             $table->text('description');
             $table->string('titre');
+            $table->string('classe');
             $table->foreignId('id_eleve')->nullable()->constrained('eleves');
             $table->foreignId('id_enseignant')->nullable()->constrained('enseignants');
             $table->foreignId('id_matiere')->nullable()->constrained('matieres');

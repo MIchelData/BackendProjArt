@@ -92,6 +92,7 @@ class HoraireController extends Controller
 
                 $listeIdCours = array();
                 $id = $request->user()->id;
+                $classeeleve = $request->user()->classe;
 
                 $etudiantmatiere = Eleve::findOrFail($id)->matiere;
                 //orderBy('nbSecondes','ASC')->get();
@@ -143,8 +144,35 @@ class HoraireController extends Controller
                     }
                 }
 
+
             }
-            //$tachesprivee =
+            $tachespubliques = Tache_Publique::where("classe",$classeeleve)->get();
+            foreach ($tachespubliques as $tachepub){
+                $horairetachepub = new instancehoraire2();
+                $horairetachepub->id = $tachepub->id;
+                $horairetachepub->classe = $request->user()->classe;
+                $horairetachepub->title = $tachepub->titre;
+                $horairetachepub->startDate = date('c', $tachepub->date);
+                $horairetachepub->endDate = date('c', $tachepub->date+($tachepub->duree*60));
+                $horairetachepub->localisation = "";
+                $horairetachepub->typeEvent = $tachepub->type;
+                $horairetachepub->description = $tachepub->description;
+                $listehoraires[] = $horairetachepub;
+            }
+            $tachesprivee = Tache_Privee::where("id_eleve", $id)->get();
+            dd($tachesprivee);
+            foreach ($tachesprivee as $tachepriv){
+                $horairetachepriv = new instancehoraire2();
+                $horairetachepriv->id = $tachepriv->id;
+                $horairetachepriv->classe = $request->user()->classe;
+                $horairetachepriv->title = $tachepub->titre;
+                $horairetachepriv->startDate = date('c', $tachepub->date);
+                $horairetachepriv->endDate = date('c', $tachepub->date+($tachepub->duree*60));
+                $horairetachepriv->localisation = "";
+                $horairetachepriv->typeEvent = $tachepub->type;
+                $horairetachepriv->description = $tachepub->description;
+                $listehoraires[] = $horairetachepub;
+            }
             usort($listehoraires, function($a, $b) {
                 return strtotime($a->startDate) - strtotime($b->endDate);
             });
@@ -165,7 +193,7 @@ class HoraireController extends Controller
            //dd($periodesmatiere);
             $classe = $this->nommatieretonomclasse($matiere->nom);
            // dd($classe);
-            $intitulécour = $this->nommatieretonomcours($matiere->nom);
+            $intitulecour = $this->nommatieretonomcours($matiere->nom);
            // dd($intitulécour);
 
            foreach ($periodesmatiere as $periode){
@@ -179,7 +207,7 @@ if(count($salle)==0){
             $horaire = new instancehoraire2();
                $horaire->id = $periode->id;
                $horaire->classe = $classe;
-               $horaire->title = $intitulécour;
+               $horaire->title = $intitulecour;
                $horaire->startDate = date('c', $periode->date_debut);
                $horaire->endDate = date('c', $periode->date_fin);
                $horaire->localisation = $salle;
@@ -197,8 +225,22 @@ if(count($salle)==0){
         return $horaireJSON;
     }
 
-    public function rendtacheprive(){
-
+    public function selectedEvent($type1 = null, $type2 = null, $type3 = null){
+$listecompleteaafficher = array();
+        if($type1 != null){
+           $listetachespubliques1 = Tache_Publique::where('type', $type1)->get();
+           array_push($listecompleteaafficher, $listetachespubliques1);
+          // $listetachesprivee = Tache_Privee::where('eleve_id', $request->user()->id)->get();
+        }
+        if($type2 != null){
+            $listetachespubliques2 = Tache_Publique::where('type', $type2)->get();
+            array_push($listecompleteaafficher, $listetachespubliques2);
+        }
+        if($type3 != null){
+            $listetachespubliques3 = Tache_Publique::where('type', $type3)->get();
+            array_push($listecompleteaafficher, $listetachespubliques3);
+        }
+        dd($listecompleteaafficher);
     }
 
     }
