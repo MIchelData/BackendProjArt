@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\instancehoraire;
 use App\Models\Eleve;
 use App\Models\Enseignant;
 use App\Models\Matiere;
 use App\Models\Periode;
 use App\Models\Salle;
-use App\Models\Tache_Privee;
 use App\Models\Tache_Publique;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class instancehoraire2
 {
@@ -30,7 +26,6 @@ class HoraireController extends Controller
     public function index(Request $request)
     {
         if (Auth::check()) {
-
 
             $listehoraires = array();
             $id = $request->user()->id;
@@ -63,7 +58,7 @@ class HoraireController extends Controller
                         $salle = Salle::findOrFail($permat->salle_id)->nom;
                         $tabcours = explode("M", $ensma->nom);
                         $classe = "M" . $tabcours[count($tabcours) - 1];
-                        $horaireenseignant = new instancehoraire2();
+                        $horaireenseignant = new \App\Http\Controllers\Api\instancehoraire2();
                         $horaireenseignant->id = $permat->id;
                         $horaireenseignant->classe = $classe;
                         $horaireenseignant->title = $ensma->nom;
@@ -130,19 +125,50 @@ class HoraireController extends Controller
                         $listehoraires[] = $horaire;
                     }
                 }
+                dd("bonjour");
+                //dd($listehoraires);
+                //  usort($listehoraires, function($a, $b) {
+                //     return $a->startDate - $b->endDate;
+                //  });
 
+                // $tacheprivee = Tache_Privee::where('id_eleve', 1)->get();
+
+                //  if(count($tacheprivee)!=0){
+                // dd($tacheprivee);
+                // }
+                $tachepublique = array();
+
+
+                foreach ($listeIdCours as $idcours) {
+                    $latache = Tache_Publique::where('id_matiere', $idcours)->get();
+                    if (count($latache) > 0) {
+                        $tachepublique[] = Tache_Publique::where('id_matiere', $idcours)->get();
+                    }
+
+
+                }
+                $listetitretachepublique = array();
+
+                foreach ($tachepublique[0] as $tachepub) {
+                    $matiere = Matiere::where('id', $tachepub->id_matiere);
+                    //dd($matiere);
+                    $tabcours = explode("M", $matiere->nom);
+                    $classe = "M" . $tabcours[count($tabcours) - 1];
+                    //  dd($classe);
+                    $horairetachepub = new instancehoraire2();
+                    $horairetachepub->id = $tachepub->id;
+                    $horairetachepub->classe = $classe;
+                }
+
+                //  dd($listetitretachepublique);
             }
-            usort($listehoraires, function($a, $b) {
-                return strtotime($a->startDate) - strtotime($b->endDate);
-            });
             $horaireJSON = json_encode($listehoraires);
             // echo($horaireJSON);
             return $horaireJSON;
 
         } else {
             return response()->json("Unauthenticated");
+           // return json("Unauthenticated");
         }
     }
-
-    }
-
+}

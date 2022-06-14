@@ -23,7 +23,9 @@ Route::get('/user/info', function(){
         return response()->json("anonyme");
     }
 
+
 });
+Route::get("/pourquoi", [App\Http\Controllers\Api\HoraireController::class, 'index']);
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 //Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves'])->middleware('enseignant');
 Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCalendrier']);
