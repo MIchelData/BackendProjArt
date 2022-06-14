@@ -27,6 +27,18 @@ class instancehoraire2
 }
 class HoraireController extends Controller
 {
+    public function nommatieretonomclasse($nommatiere){
+        $tabcours= explode("M", $nommatiere);
+        $classe = "M".$tabcours[count($tabcours)-1];
+        return $classe;
+    }
+    public function nommatieretonomcours($nommatiere){
+       // $nommatfinal = $nommatiere;
+        $tabcours= explode("M", $nommatiere);
+        $classe = "M".$tabcours[count($tabcours)-1];
+        $nommatfinal = str_replace($classe,"",$nommatiere);
+        return $nommatfinal;
+    }
     public function index(Request $request)
     {
         if (Auth::check()) {
@@ -132,6 +144,7 @@ class HoraireController extends Controller
                 }
 
             }
+            //$tachesprivee =
             usort($listehoraires, function($a, $b) {
                 return strtotime($a->startDate) - strtotime($b->endDate);
             });
@@ -142,6 +155,50 @@ class HoraireController extends Controller
         } else {
             return response()->json("Unauthenticated");
         }
+    }
+    public function horairestouteslesclasses(){
+        $i=0;
+        $listeperiodes = array();
+        $listematieres = Matiere::all();
+        foreach ($listematieres as $matiere){
+           $periodesmatiere =  $matiere->periodes()->get();
+           //dd($periodesmatiere);
+            $classe = $this->nommatieretonomclasse($matiere->nom);
+           // dd($classe);
+            $intitulécour = $this->nommatieretonomcours($matiere->nom);
+           // dd($intitulécour);
+
+           foreach ($periodesmatiere as $periode){
+$salle = Salle::where('id', $periode->matiere_id)->get();
+if(count($salle)==0){
+    $salle = "";
+}else{
+    $salle= $salle[0]->nom;
+}
+            $i++;
+            $horaire = new instancehoraire2();
+               $horaire->id = $periode->id;
+               $horaire->classe = $classe;
+               $horaire->title = $intitulécour;
+               $horaire->startDate = date('c', $periode->date_debut);
+               $horaire->endDate = date('c', $periode->date_fin);
+               $horaire->localisation = $salle;
+               $horaire->typeEvent = "course";
+               $horaire->description = "";
+              array_push($listeperiodes,$horaire);
+
+           }
+
+        }
+
+       // return $listeperiodes;
+        $horaireJSON = json_encode($listeperiodes);
+        // echo($horaireJSON);
+        return $horaireJSON;
+    }
+
+    public function rendtacheprive(){
+
     }
 
     }

@@ -21,10 +21,10 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect('/app');
-            }
+        if(Auth::guard('eleve')->check()){
+            return redirect('/home');
+        }elseif(Auth::guard('enseignant')->check()){
+            return redirect('/home');
         }
 
         return $next($request);

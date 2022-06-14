@@ -25,13 +25,14 @@ Route::get('/user/info', function(){
 
 
 });
-Route::get("/pourquoi", [App\Http\Controllers\Api\HoraireController::class, 'index']);
+Route::get("/horaire", [App\Http\Controllers\Api\HoraireController::class, 'index']);
+Route::get("/horairetoutesclasses", [App\Http\Controllers\Api\HoraireController::class, 'horairestouteslesclasses']);
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 //Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves'])->middleware('enseignant');
 Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCalendrier']);
 Route::get('/enseignant', [\App\Http\Controllers\calendrierController::class, 'getCoursEnseignant']);
 Route::get('/bonjour', [\App\Http\Controllers\Api\HoraireController::class, 'index']);
-Route::view('/horaire', 'horaireview');
+//Route::view('/horaire', 'horaireview');
 
 Auth::routes();
 
