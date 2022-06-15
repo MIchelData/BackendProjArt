@@ -64,6 +64,7 @@ class LoginController extends Controller
             return back()->withErrors(['email' => 'Email or Password is incorrect.']);
         }
     }
+
     /* public function login(Request $request)
     {
         $this->validate($request, [
