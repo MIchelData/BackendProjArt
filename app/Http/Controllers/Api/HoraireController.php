@@ -55,11 +55,12 @@ class HoraireController extends Controller
             if (count(Enseignant::where("email", $request->user()->email)->get()) != 0) {
 
                 $enseignantMatiere = Enseignant::findOrFail($id)->matieres;
-
+$listeclasses = array();
                 foreach ($enseignantMatiere as $ensma) {
                     // echo ($ensma->nom);
-                    $matiereId = $ensma->id;
 
+                    $matiereId = $ensma->id;
+                array_push($listeclasses, $this->nommatieretonomclasse($ensma));
                     //echo('<br><br>');
                     $periodematiere = Matiere::findOrFail($matiereId)->periodes()->get();
 
@@ -78,7 +79,7 @@ class HoraireController extends Controller
                         $horaireenseignant = new instancehoraire2();
                         $horaireenseignant->id = $permat->id;
                         $horaireenseignant->classe = $classe;
-                        $horaireenseignant->title = $ensma->nom;
+                        $horaireenseignant->title = $this->nommatieretonomcours($ensma->nom);
                         $horaireenseignant->startDate = date('c', $permat->date_debut);
                         $horaireenseignant->endDate = date('c', $permat->date_fin);
                         $horaireenseignant->localisation = $salle;
@@ -86,7 +87,23 @@ class HoraireController extends Controller
                         $horaireenseignant->description = "";
                         $listehoraires[] = $horaireenseignant;
                     }
-                    // dd($listehoraires);
+                    $listetachespubliques = Tache_Publique::where('classe', $listeclasses)->get();
+                    if(count($listetachespubliques)>0){
+                        foreach($listetachespubliques as $tachepublique){
+                            $horairetachepub = new instancehoraire2();
+                            $horairetachepub->id = $tachepublique->id;
+                            $horairetachepub->classe = $tachepublique->classe;
+                            $horairetachepub->title = $tachepublique->titre;
+                            $horairetachepub->startDate = date('c', $tachepublique->date);
+                            $horairetachepub->endDate = date('c', $tachepublique->date + ($tachepublique->duree * 60));
+                            $horairetachepub->localisation = "";
+                            $horairetachepub->typeEvent = $tachepublique->type;
+                            $horairetachepub->description = $tachepublique->description;
+                            $listehoraires[] = $horairetachepub;
+                        }
+                    }
+
+                    // foreach ($lis)
                 }
             } else {
 
@@ -134,7 +151,7 @@ class HoraireController extends Controller
                         $horaire = new instancehoraire2();
                         $horaire->id = $cour->id;
                         $horaire->classe = $request->user()->classe;
-                        $horaire->title = $listenomcours[$key][0]->nom;
+                        $horaire->title = $this->nommatieretonomcours($listenomcours[$key][0]->nom);
                         $horaire->startDate = date('c', $cour->date_debut);
                         $horaire->endDate = date('c', $cour->date_fin);
                         $horaire->localisation = $salleH[0]->nom;
@@ -147,31 +164,35 @@ class HoraireController extends Controller
 
             }
             $tachespubliques = Tache_Publique::where("classe",$classeeleve)->get();
-            foreach ($tachespubliques as $tachepub){
-                $horairetachepub = new instancehoraire2();
-                $horairetachepub->id = $tachepub->id;
-                $horairetachepub->classe = $request->user()->classe;
-                $horairetachepub->title = $tachepub->titre;
-                $horairetachepub->startDate = date('c', $tachepub->date);
-                $horairetachepub->endDate = date('c', $tachepub->date+($tachepub->duree*60));
-                $horairetachepub->localisation = "";
-                $horairetachepub->typeEvent = $tachepub->type;
-                $horairetachepub->description = $tachepub->description;
-                $listehoraires[] = $horairetachepub;
+            if(count($tachespubliques)>0) {
+                foreach ($tachespubliques as $tachepub) {
+                    $horairetachepub = new instancehoraire2();
+                    $horairetachepub->id = $tachepub->id;
+                    $horairetachepub->classe = $request->user()->classe;
+                    $horairetachepub->title = $tachepub->titre;
+                    $horairetachepub->startDate = date('c', $tachepub->date);
+                    $horairetachepub->endDate = date('c', $tachepub->date + ($tachepub->duree * 60));
+                    $horairetachepub->localisation = "";
+                    $horairetachepub->typeEvent = $tachepub->type;
+                    $horairetachepub->description = $tachepub->description;
+                    $listehoraires[] = $horairetachepub;
+                }
             }
             $tachesprivee = Tache_Privee::where("id_eleve", $id)->get();
-            dd($tachesprivee);
-            foreach ($tachesprivee as $tachepriv){
-                $horairetachepriv = new instancehoraire2();
-                $horairetachepriv->id = $tachepriv->id;
-                $horairetachepriv->classe = $request->user()->classe;
-                $horairetachepriv->title = $tachepub->titre;
-                $horairetachepriv->startDate = date('c', $tachepub->date);
-                $horairetachepriv->endDate = date('c', $tachepub->date+($tachepub->duree*60));
-                $horairetachepriv->localisation = "";
-                $horairetachepriv->typeEvent = $tachepub->type;
-                $horairetachepriv->description = $tachepub->description;
-                $listehoraires[] = $horairetachepub;
+            //dd($tachesprivee);
+            if(count($tachesprivee)>0) {
+                foreach ($tachesprivee as $tachepriv) {
+                    $horairetachepriv = new instancehoraire2();
+                    $horairetachepriv->id = $tachepriv->id;
+                    $horairetachepriv->classe = $request->user()->classe;
+                    $horairetachepriv->title = $tachepriv->titre;
+                    $horairetachepriv->startDate = date('c', $tachepriv->date);
+                    $horairetachepriv->endDate = date('c', $tachepriv->date + ($tachepriv->duree * 60));
+                    $horairetachepriv->localisation = "";
+                    $horairetachepriv->typeEvent = "privee";
+                    $horairetachepriv->description = $tachepriv->description;
+                    $listehoraires[] = $horairetachepriv;
+                }
             }
             usort($listehoraires, function($a, $b) {
                 return strtotime($a->startDate) - strtotime($b->endDate);

@@ -16,13 +16,21 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return redirect("/app");
 });
-Route::get('/user/info', function(){
-    if(Auth::check()){
+Route::get('/user/info', function() {
+    if (Auth::check()) {
+        //dd(Auth::user()->getTable());
         return response()->json(Auth::user());
-    }else{
+    } else {
         return response()->json("anonyme");
     }
-
+});
+    Route::get('/user/role', function(){
+        if(Auth::check()){
+            //dd(Auth::user()->getTable());
+            return response()->json(Auth::user()->getTable());
+        }else{
+            return response()->json("anonyme");
+        }
 
 });
 Route::get('/horairefiltre/{type1?}/{type2?}/{type3?}', [App\Http\Controllers\Api\HoraireController::class, 'selectedEvent']);
