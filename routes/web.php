@@ -40,7 +40,7 @@ Route::get('/user/info', function() {
 Route::get("/classes", [\App\Http\Controllers\Api\HoraireController::class, "Returnclasses" ]);
 Route::get("/horairefiltreClasse/{classe}/{type1?}/{type2?}/{type3?}/{type4?}", [\App\Http\Controllers\Api\HoraireController::class, 'selectEventClasse']);
 Route::get('/horairefiltre/{type1?}/{type2?}/{type3?}/{type4?}', [App\Http\Controllers\Api\HoraireController::class, 'selectedEvent']);
-//Route::get("/horaire", [App\Http\Controllers\Api\HoraireController::class, 'index']);//->middleware('auth');;
+Route::get("/horaire", [App\Http\Controllers\Api\HoraireController::class, 'index']);//->middleware('auth');;
 Route::get("/horairetoutesclasses", [App\Http\Controllers\Api\HoraireController::class, 'horairestouteslesclasses']);
 //Route::get('/calendrier', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves']);
 //Route::get('/test', [\App\Http\Controllers\calendrierController::class, 'getCoursTachesEleves'])->middleware('enseignant');
