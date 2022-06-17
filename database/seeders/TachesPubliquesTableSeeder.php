@@ -17,14 +17,14 @@ class TachesPubliquesTableSeeder extends Seeder
         DB::table('taches_publique')->delete();
 
         DB::table('taches_publique')->insert([
-            'description' => "2 page A4 avec l'ensemble des élèves de la classe",
+            'description' => "1 pages A4 recto verso",
             'date' => strtotime("20-07-2022 18:30:23"),
             'duree' => '240',
-            'titre' => 'rendu trombinoscope',
+            'titre' => 'Test de math',
             'id_enseignant' => 1,
             'id_eleve' => null,
             'classe' => "M49-1",
-            'type' => 'devoir']);
+            'type' => 'Test']);
 
 
 
@@ -36,7 +36,7 @@ class TachesPubliquesTableSeeder extends Seeder
                 'id_enseignant' => 2,
                 'id_eleve' => null,
                 'classe' => "M50-2",
-                'type' => 'examen',
+                'type' => 'Test',
                 'id_matiere'=> 8,
 
         ]);
