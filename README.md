@@ -18,3 +18,7 @@ il nous est impossible d’ajouter via postman un timestamp supérieur à la dat
 Pour ce qui est des seeder, il est possible de resseder la base de données en récupérant un fichier horaire au même format que celui qui a été utilisé. cela permet de mettre à jour les donneés facilement par exemple avec les horaires de l'années prochaine simplement en changeant le lien du fichier avec celui du nouvel horaire dans le seeder. 
 
 Ceci est le repo de travail, mais vers la fin, des modifications ont du êtres apportées directement sur le serveur. Pour voir la version définitive présente sur le serveur, cliquer [ici](https://github.com/MIchelData/abeProjetArt)
+
+
+YellowWait = Jhonathan Claude 
+MIchelData= Calvin Uebelhart
