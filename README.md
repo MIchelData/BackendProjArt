@@ -15,4 +15,4 @@ il est impossible pour un utilisateur d’en ajouter directement depuis l’appl
 il nous est impossible d’ajouter via postman un timestamp supérieur à la date du 31 décembre 1969 
 (nous avons changé le type dans la table en biginteger pour tenter d’ajouter manuellement 50 ans sans succès).
 
-Ceci est le repo de travail, mais vers la fin, des modifications ont du êtres apportées directement sur le serveur. Pour voir la version définitive présente sur le serveur, cliquer [ici]((https://github.com/MIchelData/abeProjetArt))
+Ceci est le repo de travail, mais vers la fin, des modifications ont du êtres apportées directement sur le serveur. Pour voir la version définitive présente sur le serveur, cliquer [ici](https://github.com/MIchelData/abeProjetArt)
