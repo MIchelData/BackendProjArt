@@ -11,6 +11,8 @@ qui créait un token lié à une table utilisateur mais qui rendait les requête
 (nous aurions peut-être dû essayer d’utiliser Axios) le login Sanctum est toutefois toujours prêt à être utiliser dans l’application si il s’avérait nécessaire. 
 Nous sommes finalement parti sur un login avec laravel et l’utilisation des cookies mis en place automatiquement par le framework.
 Malheureusement, malgré notre acharnement et bien qu’il soit possible d’insérer des données dans la bd via postman,
-il est impossible pour un utilisateur d’en ajouter directement depuis l’application. Pour une raison qui semble être un problème  configuration serveur,
+il est impossible pour un utilisateur d’en ajouter directement depuis l’application. Pour une raison qui semble être un problème configuration serveur,
 il nous est impossible d’ajouter via postman un timestamp supérieur à la date du 31 décembre 1969 
 (nous avons changé le type dans la table en biginteger pour tenter d’ajouter manuellement 50 ans sans succès).
+
+Ceci est le repo de travail, mais vers la fin, des modifications ont du êtres apportées directement sur le serveur. Pour voir la version définitive présente sur le serveur, cliquer [ici]((https://github.com/MIchelData/abeProjetArt))
