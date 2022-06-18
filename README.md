@@ -1,5 +1,14 @@
 # BackendProjArt
 
+Afin de vous connecter vous pouvez utiliser votre adresse e-mail école ainsi que votre prénom puis nom avec la première lettre en majuscule. Voici un compte élève et enseignant afin que vous puissiez tester les deux mode : 
+
+Email : jean-pierre.hess@heig-vd.ch
+MDP : Jean-PierreHess
+
+Email : yeric.gollut@heig-vd.ch
+MDP : YericGollut
+
+
 La base de données a été créer de tel façon qu’il soit possible pour un élève d’être inscrit au cours indépendamment des classes.
 Ceci vise à permettre aux étudiants redoublants ou suivant des modules dans des classes différentes d’être incorporé facilement à la base de données. 
 Puisque nous n’avions pas une vision claire dès le départ de la façon dont nous allions joindre le back-end et le front-end, 
@@ -15,7 +24,11 @@ il est impossible pour un utilisateur d’en ajouter directement depuis l’appl
 il nous est impossible d’ajouter via postman un timestamp supérieur à la date du 31 décembre 1969 
 (nous avons changé le type dans la table en biginteger pour tenter d’ajouter manuellement 50 ans sans succès).
 
-Pour ce qui est des seeder, il est possible de resseder la base de données en récupérant un fichier horaire au même format que celui qui a été utilisé. cela permet de mettre à jour les donneés facilement par exemple avec les horaires de l'années prochaine simplement en changeant le lien du fichier avec celui du nouvel horaire dans le seeder. 
+Pour ce qui est des seeder, il est possible de resseder la base de données en récupérant un fichier horaire au même format que celui qui a été utilisé. cela permet de mettre à jour les donneés facilement par exemple avec les horaires de l'années prochaine simplement en changeant le lien du fichier avec celui du nouvel horaire dans le seeder.
+
+Nous avons mis en place quelque spécificité qui mérite d’aller vérifier des fichiers en particulier. 
+Nous avons mis en place une double authentification par les deux types d’utilisateur (élève et professeur)  et pour le faire nous avons utiliser les guards afin que laravel check les données de connexion dans deux table, pour le constater il faut regarder les fichier LoginController et le Middleware «RedirectIfAuthenticated» il y a aussi la configurations des Guards dans le fichier « auth.php » dans le dossier « config ». 
+
 
 Ceci est le repo de travail, mais vers la fin, des modifications ont du êtres apportées directement sur le serveur. Pour voir la version définitive présente sur le serveur, cliquez [ici](https://github.com/MIchelData/abeProjetArt)
 
